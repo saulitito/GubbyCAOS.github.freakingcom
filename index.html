@@ -17,8 +17,68 @@
         RELEASE THE GUBBYS
     </button>
 
+    <!-- SETTINGS BUTTON -->
+    <button id="settingsButton">⚙ SETTINGS</button>
+
+    <!-- SETTINGS MENU -->
+    <div id="settingsMenu">
+
+        <div class="settingsHeader">
+            <span>SETTINGS</span>
+            <button id="closeSettings">✕</button>
+        </div>
+
+        <div class="setting">
+            <span>🔊 Sounds</span>
+            <button class="toggle active" id="soundToggle">
+                ON
+            </button>
+        </div>
+
+        <div class="setting">
+            <span>🌎 Gravity</span>
+            <button class="toggle active" id="gravityToggle">
+                ON
+            </button>
+        </div>
+
+        <div class="setting">
+            <span>💥 Wall Bounce</span>
+            <button class="toggle active" id="bounceToggle">
+                ON
+            </button>
+        </div>
+
+        <div class="setting">
+            <span>👥 Gubbys per click</span>
+
+            <input
+                id="gubbyAmount"
+                type="number"
+                min="1"
+                max="100"
+                value="15"
+            >
+        </div>
+
+        <div class="setting">
+            <span>⚡ Chaos Mode</span>
+
+            <button class="toggle" id="chaosToggle">
+                OFF
+            </button>
+        </div>
+
+        <button id="clearButton">
+            🧹 CLEAR GUBBYS
+        </button>
+
+    </div>
+
+    <!-- GUBBYS GO HERE -->
     <div id="gubbyContainer"></div>
 
+    <!-- SOUND -->
     <audio id="gubbySound" src="gubby.mp3"></audio>
 
     <script src="script.js"></script>
