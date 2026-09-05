@@ -1,47 +1,72 @@
-/* =========================
+/* =====================================
    ELEMENTS
-========================= */
+===================================== */
 
 const button =
-    document.getElementById("gubbyButton");
+    document.getElementById(
+        "gubbyButton"
+    );
 
 const container =
-    document.getElementById("gubbyContainer");
+    document.getElementById(
+        "gubbyContainer"
+    );
 
 const sound =
-    document.getElementById("gubbySound");
+    document.getElementById(
+        "gubbySound"
+    );
 
 const settingsButton =
-    document.getElementById("settingsButton");
+    document.getElementById(
+        "settingsButton"
+    );
 
 const settingsMenu =
-    document.getElementById("settingsMenu");
+    document.getElementById(
+        "settingsMenu"
+    );
 
 const closeSettings =
-    document.getElementById("closeSettings");
+    document.getElementById(
+        "closeSettings"
+    );
 
 const soundToggle =
-    document.getElementById("soundToggle");
+    document.getElementById(
+        "soundToggle"
+    );
 
 const gravityToggle =
-    document.getElementById("gravityToggle");
+    document.getElementById(
+        "gravityToggle"
+    );
 
 const bounceToggle =
-    document.getElementById("bounceToggle");
+    document.getElementById(
+        "bounceToggle"
+    );
 
 const chaosToggle =
-    document.getElementById("chaosToggle");
+    document.getElementById(
+        "chaosToggle"
+    );
 
 const clearButton =
-    document.getElementById("clearButton");
+    document.getElementById(
+        "clearButton"
+    );
 
 const gubbyAmount =
-    document.getElementById("gubbyAmount");
+    document.getElementById(
+        "gubbyAmount"
+    );
 
 
-/* =========================
+
+/* =====================================
    SETTINGS
-========================= */
+===================================== */
 
 let gubbys = [];
 
@@ -54,177 +79,263 @@ let bounceEnabled = true;
 let chaosEnabled = false;
 
 
-/* =========================
+
+/* =====================================
    SETTINGS MENU
-========================= */
+===================================== */
 
-settingsButton.addEventListener("click", () => {
+settingsButton.addEventListener(
+    "click",
+    () => {
 
-    settingsMenu.classList.toggle("open");
+        settingsMenu.classList.toggle(
+            "open"
+        );
 
-});
-
-
-closeSettings.addEventListener("click", () => {
-
-    settingsMenu.classList.remove("open");
-
-});
+    }
+);
 
 
-/* =========================
+closeSettings.addEventListener(
+    "click",
+    () => {
+
+        settingsMenu.classList.remove(
+            "open"
+        );
+
+    }
+);
+
+
+
+/* =====================================
    TOGGLE FUNCTION
-========================= */
+===================================== */
 
-function toggleSetting(toggleButton, callback) {
+function toggleSetting(
+    toggleButton,
+    callback
+) {
 
-    toggleButton.classList.toggle("active");
+    toggleButton.classList.toggle(
+        "active"
+    );
+
 
     const enabled =
-        toggleButton.classList.contains("active");
+        toggleButton.classList.contains(
+            "active"
+        );
+
 
     toggleButton.textContent =
-        enabled ? "ON" : "OFF";
+        enabled
+            ? "ON"
+            : "OFF";
+
 
     callback(enabled);
 
 }
 
 
-/* =========================
-   SOUND
-========================= */
 
-soundToggle.addEventListener("click", () => {
+/* =====================================
+   SOUND TOGGLE
+===================================== */
 
-    toggleSetting(
-        soundToggle,
+soundToggle.addEventListener(
+    "click",
+    () => {
 
-        (value) => {
-            soundsEnabled = value;
-        }
-    );
+        toggleSetting(
+            soundToggle,
 
-});
+            (value) => {
 
+                soundsEnabled =
+                    value;
 
-/* =========================
-   GRAVITY
-========================= */
+            }
+        );
 
-gravityToggle.addEventListener("click", () => {
-
-    toggleSetting(
-        gravityToggle,
-
-        (value) => {
-            gravityEnabled = value;
-        }
-    );
-
-});
+    }
+);
 
 
-/* =========================
-   WALL BOUNCE
-========================= */
 
-bounceToggle.addEventListener("click", () => {
+/* =====================================
+   GRAVITY TOGGLE
+===================================== */
 
-    toggleSetting(
-        bounceToggle,
+gravityToggle.addEventListener(
+    "click",
+    () => {
 
-        (value) => {
-            bounceEnabled = value;
-        }
-    );
+        toggleSetting(
+            gravityToggle,
 
-});
+            (value) => {
+
+                gravityEnabled =
+                    value;
+
+            }
+        );
+
+    }
+);
 
 
-/* =========================
+
+/* =====================================
+   BOUNCE TOGGLE
+===================================== */
+
+bounceToggle.addEventListener(
+    "click",
+    () => {
+
+        toggleSetting(
+            bounceToggle,
+
+            (value) => {
+
+                bounceEnabled =
+                    value;
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =====================================
    CHAOS MODE
-========================= */
+===================================== */
 
-chaosToggle.addEventListener("click", () => {
+chaosToggle.addEventListener(
+    "click",
+    () => {
 
-    toggleSetting(
-        chaosToggle,
+        toggleSetting(
+            chaosToggle,
 
-        (value) => {
-            chaosEnabled = value;
-        }
-    );
+            (value) => {
 
-});
+                chaosEnabled =
+                    value;
+
+            }
+        );
+
+    }
+);
 
 
-/* =========================
+
+/* =====================================
    CREATE GUBBY
-========================= */
+===================================== */
 
 function createGubby() {
 
+
     const gubby =
-        document.createElement("img");
-
-    gubby.className = "gubby";
-
-    gubby.src = "gubby.png";
-
-    container.appendChild(gubby);
+        document.createElement(
+            "img"
+        );
 
 
-    /* =========================
-       RARITY ROLL
-    ========================== */
+    gubby.className =
+        "gubby";
+
+
+    gubby.src =
+        "gubby.png";
+
+
+    container.appendChild(
+        gubby
+    );
+
+
+
+    /* =================================
+       RARITY
+    ================================= */
 
     const roll =
         Math.random() * 100;
 
-    let variant = "normal";
+
+    let variant =
+        "normal";
 
 
-    /*
-        1% Rainbow
-        5% Golden
-        94% Normal
-    */
-
+    // 🌈 1%
     if (roll < 1) {
 
-        variant = "rainbow";
+        variant =
+            "rainbow";
 
-    } else if (roll < 6) {
+    }
 
-        variant = "golden";
+    // 🟡 5%
+    else if (roll < 6) {
+
+        variant =
+            "golden";
 
     }
 
 
-    /* =========================
-       APPLY VARIANT
-    ========================== */
+
+    /* =================================
+       APPLY RARITY
+    ================================= */
 
     if (variant !== "normal") {
 
-        gubby.classList.add(variant);
+        gubby.classList.add(
+            variant
+        );
 
     }
 
 
-    /* =========================
-       PHYSICS
-    ========================== */
+
+    /* =================================
+       SIZE
+    ================================= */
 
     const size = 75;
 
-    let x = -size;
+
+
+    /* =================================
+       START POSITION
+    ================================= */
+
+    let x =
+        -size;
+
 
     let y =
         Math.random() *
-        (window.innerHeight - size);
+        (
+            window.innerHeight -
+            size
+        );
 
+
+
+    /* =================================
+       VELOCITY
+    ================================= */
 
     let vx =
         3 +
@@ -236,9 +347,10 @@ function createGubby() {
         Math.random() * 10;
 
 
-    /* =========================
+
+    /* =================================
        CHAOS MODE
-    ========================== */
+    ================================= */
 
     if (chaosEnabled) {
 
@@ -249,18 +361,23 @@ function createGubby() {
     }
 
 
-    /* =========================
-       RARE SPEED
-    ========================== */
 
-    if (variant === "golden") {
+    /* =================================
+       RARE SPEED
+    ================================= */
+
+    if (
+        variant === "golden"
+    ) {
 
         vx *= 1.2;
 
     }
 
 
-    if (variant === "rainbow") {
+    if (
+        variant === "rainbow"
+    ) {
 
         vx *= 1.5;
 
@@ -269,84 +386,111 @@ function createGubby() {
     }
 
 
-    /* =========================
-       DATA
-    ========================== */
+
+    /* =================================
+       STORE DATA
+    ================================= */
 
     const gubbyData = {
 
-        element: gubby,
+        element:
+            gubby,
 
-        x: x,
+        x:
+            x,
 
-        y: y,
+        y:
+            y,
 
-        vx: vx,
+        vx:
+            vx,
 
-        vy: vy,
+        vy:
+            vy,
 
-        size: size,
+        size:
+            size,
 
-        variant: variant
+        variant:
+            variant
 
     };
 
 
-    gubbys.push(gubbyData);
+    gubbys.push(
+        gubbyData
+    );
+
 
 
     console.log(
-        "Spawned Gubby:",
+        "Gubby spawned:",
         variant
     );
 
 }
 
 
-/* =========================
+
+/* =====================================
    RELEASE GUBBYS
-========================= */
+===================================== */
 
-button.addEventListener("click", () => {
+button.addEventListener(
+    "click",
+    () => {
 
-    let amount =
-        Number(gubbyAmount.value);
+
+        let amount =
+            Number(
+                gubbyAmount.value
+            );
 
 
-    if (isNaN(amount)) {
+        if (
+            isNaN(amount)
+        ) {
 
-        amount = 15;
+            amount = 15;
+
+        }
+
+
+        amount =
+            Math.max(
+                1,
+                Math.min(
+                    amount,
+                    100
+                )
+            );
+
+
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            createGubby();
+
+        }
 
     }
+);
 
 
-    amount =
-        Math.max(
-            1,
-            Math.min(amount, 100)
-        );
 
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        createGubby();
-
-    }
-
-});
-
-
-/* =========================
+/* =====================================
    WALL SOUND
-========================= */
+===================================== */
 
 function playSound() {
 
-    if (!soundsEnabled) {
+
+    if (
+        !soundsEnabled
+    ) {
 
         return;
 
@@ -357,10 +501,14 @@ function playSound() {
         sound.cloneNode();
 
 
-    newSound.volume = 0.7;
+    newSound.volume =
+        0.7;
 
 
-    newSound.play().catch(() => {});
+    newSound.play()
+        .catch(
+            () => {}
+        );
 
 
     newSound.addEventListener(
@@ -375,45 +523,61 @@ function playSound() {
 }
 
 
-/* =========================
-   PHYSICS UPDATE
-========================= */
+
+/* =====================================
+   PHYSICS
+===================================== */
 
 function update() {
 
-    for (const gubby of gubbys) {
+
+    for (
+        const gubby of gubbys
+    ) {
 
 
-        /* =========================
+        /* =============================
            GRAVITY
-        ========================== */
+        ============================= */
 
-        if (gravityEnabled) {
+        if (
+            gravityEnabled
+        ) {
 
-            gubby.vy += 0.25;
+            gubby.vy +=
+                0.25;
 
         }
 
 
-        /* =========================
-           MOVEMENT
-        ========================== */
 
-        gubby.x += gubby.vx;
+        /* =============================
+           MOVE
+        ============================= */
 
-        gubby.y += gubby.vy;
+        gubby.x +=
+            gubby.vx;
 
 
-        /* =========================
+        gubby.y +=
+            gubby.vy;
+
+
+
+        /* =============================
            LEFT WALL
-        ========================== */
+        ============================= */
 
-        if (gubby.x <= 0) {
+        if (
+            gubby.x <= 0
+        ) {
 
             gubby.x = 0;
 
 
-            if (bounceEnabled) {
+            if (
+                bounceEnabled
+            ) {
 
                 gubby.vx *= -1;
 
@@ -424,13 +588,15 @@ function update() {
         }
 
 
-        /* =========================
+
+        /* =============================
            RIGHT WALL
-        ========================== */
+        ============================= */
 
         if (
-            gubby.x + gubby.size
-            >= window.innerWidth
+            gubby.x +
+            gubby.size >=
+            window.innerWidth
         ) {
 
             gubby.x =
@@ -438,7 +604,9 @@ function update() {
                 gubby.size;
 
 
-            if (bounceEnabled) {
+            if (
+                bounceEnabled
+            ) {
 
                 gubby.vx *= -1;
 
@@ -449,18 +617,24 @@ function update() {
         }
 
 
-        /* =========================
-           TOP WALL
-        ========================== */
 
-        if (gubby.y <= 0) {
+        /* =============================
+           TOP
+        ============================= */
+
+        if (
+            gubby.y <= 0
+        ) {
 
             gubby.y = 0;
 
 
-            if (bounceEnabled) {
+            if (
+                bounceEnabled
+            ) {
 
-                gubby.vy *= -0.9;
+                gubby.vy *=
+                    -0.9;
 
                 playSound();
 
@@ -469,13 +643,15 @@ function update() {
         }
 
 
-        /* =========================
-           BOTTOM WALL
-        ========================== */
+
+        /* =============================
+           BOTTOM
+        ============================= */
 
         if (
-            gubby.y + gubby.size
-            >= window.innerHeight
+            gubby.y +
+            gubby.size >=
+            window.innerHeight
         ) {
 
             gubby.y =
@@ -483,9 +659,12 @@ function update() {
                 gubby.size;
 
 
-            if (bounceEnabled) {
+            if (
+                bounceEnabled
+            ) {
 
-                gubby.vy *= -0.9;
+                gubby.vy *=
+                    -0.9;
 
                 playSound();
 
@@ -494,12 +673,14 @@ function update() {
         }
 
 
-        /* =========================
-           POSITION
-        ========================== */
+
+        /* =============================
+           UPDATE POSITION
+        ============================= */
 
         gubby.element.style.left =
             gubby.x + "px";
+
 
         gubby.element.style.top =
             gubby.y + "px";
@@ -507,20 +688,27 @@ function update() {
     }
 
 
-    requestAnimationFrame(update);
+
+    requestAnimationFrame(
+        update
+    );
 
 }
 
 
-/* =========================
-   CLEAR EVERYTHING
-========================= */
+
+/* =====================================
+   CLEAR GUBBYS
+===================================== */
 
 clearButton.addEventListener(
     "click",
     () => {
 
-        for (const gubby of gubbys) {
+
+        for (
+            const gubby of gubbys
+        ) {
 
             gubby.element.remove();
 
@@ -533,8 +721,9 @@ clearButton.addEventListener(
 );
 
 
-/* =========================
+
+/* =====================================
    START
-========================= */
+===================================== */
 
 update();
