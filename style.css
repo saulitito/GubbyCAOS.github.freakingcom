@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     margin: 0;
@@ -14,37 +13,29 @@ body {
     height: 100%;
 }
 
-
 body {
-
     overflow: hidden;
 
+    color: white;
+    font-family: Arial, sans-serif;
+
     background-image: url("background.png");
-
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     background-color: #111;
-
-    color: white;
-
-    font-family: Arial, sans-serif;
 }
 
 
 /* =====================================
-   BACKGROUND DARKEN
+   DARK BACKGROUND OVERLAY
 ===================================== */
 
 body::before {
-
     content: "";
 
     position: fixed;
-
     inset: 0;
 
     background: rgba(0, 0, 0, 0.2);
@@ -55,208 +46,59 @@ body::before {
 }
 
 
-
 /* =====================================
-   TOP NAVBAR
+   SMALL TOP NAVBAR
 ===================================== */
 
 .navbar {
-
     position: fixed;
 
-    top: 18px;
+    top: 10px;
+    left: 50%;
 
-    left: 30px;
+    transform: translateX(-50%);
 
-    right: 30px;
+    width: min(720px, calc(100% - 30px));
 
-    height: 62px;
+    height: 48px;
 
-    padding: 0 12px 0 24px;
+    padding: 0 10px 0 16px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-
-    /* Glass */
-    background:
-        linear-gradient(
-            100deg,
-            rgba(117, 64, 28, 0.92),
-            rgba(55, 47, 82, 0.94)
-        );
-
-
-    /* Rounded corners */
-    border-radius: 35px;
-
-
-    /* Border */
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.25
+    background: linear-gradient(
+        100deg,
+        rgba(117, 64, 28, 0.92),
+        rgba(55, 47, 82, 0.94)
     );
 
+    border-radius: 28px;
 
-    /* Outer glow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
     box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.15),
+        0 0 20px rgba(130, 100, 255, 0.25),
+        0 6px 25px rgba(0, 0, 0, 0.4);
 
-        0 0 8px rgba(
-            255,
-            255,
-            255,
-            0.15
-        ),
-
-        0 0 25px rgba(
-            130,
-            100,
-            255,
-            0.25
-        ),
-
-        0 8px 35px rgba(
-            0,
-            0,
-            0,
-            0.45
-        ),
-
-        inset 0 1px 1px rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
-
-
-    backdrop-filter: blur(18px);
-
-    -webkit-backdrop-filter: blur(18px);
-
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 
     z-index: 5000;
 
-
-    animation:
-        navbarGlow 3s ease-in-out infinite;
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
 }
 
-
-/* =====================================
-   NAVBAR GLOW ANIMATION
-===================================== */
-
-@keyframes navbarGlow {
-
-    0% {
-
-        box-shadow:
-
-            0 0 8px rgba(
-                255,
-                255,
-                255,
-                0.15
-            ),
-
-            0 0 25px rgba(
-                130,
-                100,
-                255,
-                0.25
-            ),
-
-            0 8px 35px rgba(
-                0,
-                0,
-                0,
-                0.45
-            ),
-
-            inset 0 1px 1px rgba(
-                255,
-                255,
-                255,
-                0.2
-            );
-    }
-
-
-    50% {
-
-        box-shadow:
-
-            0 0 12px rgba(
-                255,
-                255,
-                255,
-                0.25
-            ),
-
-            0 0 40px rgba(
-                150,
-                120,
-                255,
-                0.4
-            ),
-
-            0 8px 35px rgba(
-                0,
-                0,
-                0,
-                0.45
-            ),
-
-            inset 0 1px 1px rgba(
-                255,
-                255,
-                255,
-                0.25
-            );
-    }
-
-
-    100% {
-
-        box-shadow:
-
-            0 0 8px rgba(
-                255,
-                255,
-                255,
-                0.15
-            ),
-
-            0 0 25px rgba(
-                130,
-                100,
-                255,
-                0.25
-            ),
-
-            0 8px 35px rgba(
-                0,
-                0,
-                0,
-                0.45
-            ),
-
-            inset 0 1px 1px rgba(
-                255,
-                255,
-                255,
-                0.2
-            );
-    }
-
+.navbar:hover {
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.2),
+        0 0 30px rgba(130, 100, 255, 0.35),
+        0 6px 25px rgba(0, 0, 0, 0.4);
 }
-
 
 
 /* =====================================
@@ -264,54 +106,44 @@ body::before {
 ===================================== */
 
 .nav-logo {
+    font-family: "OldRoblox", Arial, sans-serif;
 
-    font-family:
-        "OldRoblox",
-        Arial,
-        sans-serif;
-
-    font-size: 27px;
+    font-size: 20px;
 
     white-space: nowrap;
 
-    background:
-
-        linear-gradient(
-            90deg,
-            #ff7657,
-            #ffd34d,
-            #9cff78,
-            #8d8cff
-        );
+    background: linear-gradient(
+        90deg,
+        #ff7657,
+        #ffd34d,
+        #9cff78,
+        #8d8cff
+    );
 
     -webkit-background-clip: text;
-
     background-clip: text;
 
     color: transparent;
 
     filter:
         drop-shadow(
-            0 0 8px
+            0 0 6px
             rgba(255, 150, 100, 0.35)
         );
 }
 
 
-
 /* =====================================
-   NAV BUTTON CONTAINER
+   NAV LINKS
 ===================================== */
 
 .nav-links {
-
     display: flex;
 
     align-items: center;
 
-    gap: 4px;
+    gap: 2px;
 }
-
 
 
 /* =====================================
@@ -319,116 +151,73 @@ body::before {
 ===================================== */
 
 .nav-links button {
-
     border: none;
-
     outline: none;
 
     background: transparent;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.88
-        );
+    color: rgba(255, 255, 255, 0.88);
 
-    font-family:
-        Arial,
-        sans-serif;
+    font-family: Arial, sans-serif;
 
-    font-size: 14px;
+    font-size: 12px;
 
     font-weight: 600;
 
-    padding: 10px 13px;
+    padding: 7px 10px;
 
-    border-radius: 22px;
+    border-radius: 18px;
 
     cursor: pointer;
 
     transition:
-        0.2s ease;
+        background 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
 }
 
-
 .nav-links button:hover {
-
     color: white;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.13
-        );
+        rgba(255, 255, 255, 0.13);
 
     transform:
         translateY(-1px);
-
-    box-shadow:
-        0 0 15px
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
 }
 
-
 .nav-links button:active {
-
     transform:
         scale(0.94);
 }
 
 
-
 /* =====================================
-   GUBHUB BUTTON
+   GUBHUB
 ===================================== */
 
 .nav-links a {
-
     text-decoration: none;
 }
 
-
 .nav-links a button {
-
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.14
-        );
+        rgba(255, 255, 255, 0.14);
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
+        rgba(255, 255, 255, 0.2);
 }
 
 
-
 /* =====================================
-   TITLE
+   GUBBY FULL CAOS TITLE
 ===================================== */
 
 .text-container {
-
     position: fixed;
 
-    top: 105px;
-
+    top: 85px;
     left: 50%;
 
     transform:
@@ -441,7 +230,7 @@ body::before {
         Arial,
         sans-serif;
 
-    font-size: 52px;
+    font-size: 48px;
 
     white-space: nowrap;
 
@@ -450,18 +239,11 @@ body::before {
     filter:
         drop-shadow(
             0 0 10px
-            rgba(
-                255,
-                255,
-                255,
-                0.25
-            )
+            rgba(255, 255, 255, 0.3)
         );
 }
 
-
 .wavy-text {
-
     display: inline-block;
 
     animation:
@@ -470,43 +252,33 @@ body::before {
         infinite;
 }
 
-
 @keyframes wavy {
 
     0%,
     100% {
-
         transform:
             translateY(0)
             rotate(-2deg);
     }
-
 
     25% {
-
         transform:
-            translateY(-8px)
+            translateY(-7px)
             rotate(2deg);
     }
 
-
     50% {
-
         transform:
             translateY(0)
             rotate(-2deg);
     }
 
-
     75% {
-
         transform:
-            translateY(8px)
+            translateY(7px)
             rotate(2deg);
     }
-
 }
-
 
 
 /* =====================================
@@ -514,35 +286,23 @@ body::before {
 ===================================== */
 
 #settingsMenu {
-
     position: fixed;
 
-    top: 92px;
+    top: 70px;
+    right: calc(50% - 360px);
 
-    right: 30px;
+    width: 300px;
 
-    width: 315px;
-
-    padding: 20px;
+    padding: 18px;
 
     background:
-        rgba(
-            25,
-            25,
-            30,
-            0.94
-        );
+        rgba(25, 25, 30, 0.94);
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
+        rgba(255, 255, 255, 0.2);
 
-    border-radius: 22px;
+    border-radius: 20px;
 
     backdrop-filter:
         blur(20px);
@@ -551,31 +311,17 @@ body::before {
         blur(20px);
 
     box-shadow:
-
         0 0 20px
-        rgba(
-            130,
-            100,
-            255,
-            0.2
-        ),
-
-        0 15px 50px
-        rgba(
-            0,
-            0,
-            0,
-            0.5
-        );
+        rgba(130, 100, 255, 0.25),
+        0 15px 40px
+        rgba(0, 0, 0, 0.5);
 
     z-index: 6000;
 
     display: none;
 }
 
-
 #settingsMenu.open {
-
     display: block;
 
     animation:
@@ -584,11 +330,9 @@ body::before {
         ease-out;
 }
 
-
 @keyframes settingsOpen {
 
     from {
-
         opacity: 0;
 
         transform:
@@ -596,18 +340,14 @@ body::before {
             scale(0.96);
     }
 
-
     to {
-
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
     }
-
 }
-
 
 
 /* =====================================
@@ -615,7 +355,6 @@ body::before {
 ===================================== */
 
 .settingsHeader {
-
     display: flex;
 
     justify-content:
@@ -623,37 +362,32 @@ body::before {
 
     align-items: center;
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 
-    font-size: 22px;
+    font-size: 20px;
 
     font-weight: bold;
 }
 
-
 #closeSettings {
-
     border: none;
 
     background: transparent;
 
     color: white;
 
-    font-size: 20px;
+    font-size: 18px;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s;
+        transform 0.2s ease;
 }
 
-
 #closeSettings:hover {
-
     transform:
         rotate(90deg);
 }
-
 
 
 /* =====================================
@@ -661,7 +395,6 @@ body::before {
 ===================================== */
 
 .setting {
-
     display: flex;
 
     justify-content:
@@ -669,18 +402,12 @@ body::before {
 
     align-items: center;
 
-    padding: 12px 0;
+    padding: 11px 0;
 
     border-bottom:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+        rgba(255, 255, 255, 0.08);
 }
-
 
 
 /* =====================================
@@ -688,80 +415,57 @@ body::before {
 ===================================== */
 
 .toggle {
+    min-width: 52px;
 
-    min-width: 55px;
-
-    padding: 7px 10px;
+    padding: 6px 9px;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
+        rgba(255, 255, 255, 0.2);
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+        rgba(255, 255, 255, 0.08);
 
     color: white;
 
     font-weight: bold;
 
     cursor: pointer;
+
+    transition:
+        0.2s ease;
 }
 
+.toggle:hover {
+    background:
+        rgba(255, 255, 255, 0.15);
+}
 
 .toggle.active {
-
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
-
+        rgba(255, 255, 255, 0.2);
 }
-
 
 
 /* =====================================
-   NUMBER INPUT
+   GUBBY AMOUNT
 ===================================== */
 
 #gubbyAmount {
+    width: 60px;
 
-    width: 65px;
-
-    padding: 7px;
+    padding: 6px;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
+        rgba(255, 255, 255, 0.2);
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     background:
-        rgba(
-            0,
-            0,
-            0,
-            0.3
-        );
+        rgba(0, 0, 0, 0.3);
 
     color: white;
 
@@ -769,13 +473,11 @@ body::before {
 }
 
 
-
 /* =====================================
    GUBBY CONTAINER
 ===================================== */
 
 #gubbyContainer {
-
     position: fixed;
 
     inset: 0;
@@ -784,17 +486,14 @@ body::before {
 }
 
 
-
 /* =====================================
-   NORMAL GUBBY
+   GUBBY
 ===================================== */
 
 .gubby {
-
     position: absolute;
 
     width: 75px;
-
     height: 75px;
 
     object-fit: contain;
@@ -810,13 +509,12 @@ body::before {
 }
 
 
-
 /* =====================================
    GOLDEN GUBBY
+   5%
 ===================================== */
 
 .gubby.golden {
-
     filter:
         sepia(1)
         saturate(5)
@@ -832,32 +530,26 @@ body::before {
         alternate;
 }
 
-
 @keyframes goldenGlow {
 
     from {
-
         transform:
             scale(1);
     }
 
-
     to {
-
         transform:
             scale(1.12);
     }
-
 }
-
 
 
 /* =====================================
    RAINBOW GUBBY
+   1%
 ===================================== */
 
 .gubby.rainbow {
-
     animation:
         rainbow
         1s
@@ -865,59 +557,42 @@ body::before {
         infinite;
 }
 
-
 @keyframes rainbow {
 
     0% {
-
         filter:
             hue-rotate(0deg)
             saturate(3)
             drop-shadow(
                 0 0 8px
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.5
-                )
+                rgba(255, 255, 255, 0.5)
             );
     }
 
-
     25% {
-
         filter:
             hue-rotate(90deg)
             saturate(3);
     }
 
-
     50% {
-
         filter:
             hue-rotate(180deg)
             saturate(3);
     }
 
-
     75% {
-
         filter:
             hue-rotate(270deg)
             saturate(3);
     }
 
-
     100% {
-
         filter:
             hue-rotate(360deg)
             saturate(3);
     }
-
 }
-
 
 
 /* =====================================
@@ -925,11 +600,9 @@ body::before {
 ===================================== */
 
 #youtubePlayer {
-
     position: fixed;
 
     width: 1px;
-
     height: 1px;
 
     opacity: 0;
@@ -937,12 +610,10 @@ body::before {
     pointer-events: none;
 
     left: 0;
-
     bottom: 0;
 
     z-index: -1;
 }
-
 
 
 /* =====================================
@@ -952,31 +623,25 @@ body::before {
 @media (max-width: 700px) {
 
     .navbar {
-
-        left: 10px;
-
-        right: 10px;
+        width:
+            calc(100% - 20px);
 
         height: auto;
 
-        min-height: 60px;
+        min-height: 48px;
 
         padding:
-            8px 12px;
+            7px 9px;
 
-        flex-wrap: wrap;
-
-        gap: 5px;
+        gap: 4px;
     }
-
 
     .nav-logo {
-
-        font-size: 21px;
+        font-size: 17px;
     }
 
-
     .nav-links {
+        gap: 1px;
 
         flex-wrap: wrap;
 
@@ -984,33 +649,25 @@ body::before {
             flex-end;
     }
 
-
     .nav-links button {
-
-        font-size: 11px;
+        font-size: 10px;
 
         padding:
-            7px 8px;
+            6px 7px;
     }
-
 
     .text-container {
+        top: 75px;
 
-        top: 105px;
-
-        font-size: 35px;
+        font-size: 34px;
     }
 
-
     #settingsMenu {
-
-        top: 85px;
+        top: 68px;
 
         left: 10px;
-
         right: 10px;
 
         width: auto;
     }
-
 }
