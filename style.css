@@ -501,23 +501,13 @@ body::before {
     user-select: none;
     pointer-events: none;
 
-    will-change:
-        left,
-        top,
-        transform;
-
     transform-origin: center center;
 
-    --scale-x: 1;
-    --scale-y: 1;
-
-    transform:
-        scale(
-            var(--scale-x),
-            var(--scale-y)
-        );
+    will-change:
+        transform,
+        left,
+        top;
 }
-
 
 /* =====================================
    GOLDEN GUBBY
