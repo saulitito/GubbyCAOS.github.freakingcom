@@ -499,13 +499,23 @@ body::before {
     object-fit: contain;
 
     user-select: none;
-
     pointer-events: none;
 
     will-change:
         left,
         top,
         transform;
+
+    transform-origin: center center;
+
+    --scale-x: 1;
+    --scale-y: 1;
+
+    transform:
+        scale(
+            var(--scale-x),
+            var(--scale-y)
+        );
 }
 
 
@@ -531,15 +541,20 @@ body::before {
 }
 
 @keyframes goldenGlow {
-
     from {
-        transform:
-            scale(1);
+        filter:
+            sepia(1)
+            saturate(5)
+            brightness(1.3)
+            drop-shadow(0 0 7px gold);
     }
 
     to {
-        transform:
-            scale(1.12);
+        filter:
+            sepia(1)
+            saturate(5)
+            brightness(1.4)
+            drop-shadow(0 0 15px gold);
     }
 }
 
@@ -558,7 +573,6 @@ body::before {
 }
 
 @keyframes rainbow {
-
     0% {
         filter:
             hue-rotate(0deg)
