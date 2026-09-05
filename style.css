@@ -46,14 +46,21 @@ body {
     transform: scale(0.95);
 }
 
+@font-face {
+    font-family: "OldRoblox";
+    src: url("OldRobloxFont-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 .text-container {
     position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
 
+    font-family: "OldRoblox", sans-serif;
     font-size: 48px;
-    font-weight: 900;
     white-space: nowrap;
 
     z-index: 1000;
