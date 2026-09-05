@@ -1,3 +1,7 @@
+/* =========================
+   EVERYTHING
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -7,344 +11,428 @@ body {
 
     overflow: hidden;
 
-    background: #111;
-
     color: white;
 
     font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    background-image: url("background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-color: #111;
 }
+
+
+/* =========================
+   DARK OVERLAY
+========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: fixed;
+
+    top: 15px;
+    left: 30px;
+    right: 30px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 10px 0 20px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(120, 70, 30, 0.85),
+        rgba(50, 45, 75, 0.9)
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 35px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(15px);
+
+    z-index: 5000;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.nav-logo {
+    font-family: "OldRoblox", sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #ff7657,
+        #ffd34d,
+        #9cff78,
+        #8d8cff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   NAV BUTTONS
+========================= */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.nav-links button {
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    padding: 10px 13px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.2s,
+        color 0.2s;
+}
+
+
+.nav-links button:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+.nav-links button:active {
+    transform: scale(0.94);
+}
+
+
+/* GUBHUB */
+
+.nav-links a {
+    text-decoration: none;
+}
+
+
+.nav-links a button {
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 
 /* =========================
    TITLE
 ========================= */
 
-#gubhubButton {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 2000;
-}
-
-#gubhubButton button {
-    padding: 12px 18px;
-    background: #222;
-    color: white;
-    border: 2px solid white;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.15s;
-}
-
-#gubhubButton button:hover {
-    transform: scale(1.08);
-    background: #333;
-}
-
-#gubhubButton button:active {
-    transform: scale(0.95);
-}
-
-@font-face {
-    font-family: "OldRoblox";
-    src: url("OldRobloxFont-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-
 .text-container {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+
+    top: 105px;
+
     left: 50%;
+
     transform: translateX(-50%);
 
     font-family: "OldRoblox", sans-serif;
-    font-size: 48px;
+
+    font-size: 52px;
+
     white-space: nowrap;
-
-    z-index: 1000;
-}
-
-.wavy-text {
-    display: inline-block;
-    animation: wavy 1.2s ease-in-out infinite;
-}
-
-@keyframes wavy {
-    0%, 100% {
-        transform: translateY(0) rotate(-2deg);
-    }
-
-    25% {
-        transform: translateY(-8px) rotate(2deg);
-    }
-
-    50% {
-        transform: translateY(0) rotate(-2deg);
-    }
-
-    75% {
-        transform: translateY(8px) rotate(2deg);
-    }
-}
-
-/* =========================
-   MAIN BUTTON
-========================= */
-
-#gubbyButton {
-
-    position: absolute;
-
-    top: 100px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 1000;
-
-    padding: 18px 30px;
-
-    border: 3px solid white;
-    border-radius: 10px;
-
-    background: #222;
-
-    color: white;
-
-    font-size: 20px;
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-#gubbyButton:hover {
-    transform: translateX(-50%) scale(1.08);
-}
-
-#gubbyButton:active {
-    transform: translateX(-50%) scale(0.95);
-}
-
-/* =========================
-   SETTINGS BUTTON
-========================= */
-
-#settingsButton {
-
-    position: absolute;
-
-    top: 20px;
-    right: 20px;
 
     z-index: 2000;
 
-    padding: 12px 18px;
-
-    background: #222;
-
-    color: white;
-
-    border: 2px solid white;
-
-    border-radius: 8px;
-
-    font-weight: bold;
-
-    cursor: pointer;
+    pointer-events: none;
 }
 
-#settingsButton:hover {
-    background: #333;
+
+.wavy-text {
+    display: inline-block;
+
+    animation: wavy 1.2s ease-in-out infinite;
 }
+
+
+@keyframes wavy {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    25% {
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    75% {
+        transform:
+            translateY(8px)
+            rotate(2deg);
+    }
+
+}
+
 
 /* =========================
    SETTINGS MENU
 ========================= */
 
 #settingsMenu {
+    position: fixed;
 
-    position: absolute;
+    top: 85px;
 
-    top: 70px;
-    right: 20px;
+    right: 30px;
 
-    width: 300px;
+    width: 310px;
 
     padding: 20px;
 
-    background: #181818;
+    background: rgba(25, 25, 30, 0.92);
 
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 
-    border-radius: 12px;
+    border-radius: 20px;
 
-    z-index: 3000;
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.5);
+
+    z-index: 6000;
 
     display: none;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+
 
 #settingsMenu.open {
     display: block;
+
+    animation: settingsOpen 0.2s ease-out;
 }
 
-/* HEADER */
+
+@keyframes settingsOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-10px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================
+   SETTINGS HEADER
+========================= */
 
 .settingsHeader {
-
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
 
-    font-size: 24px;
+    font-size: 22px;
 
     font-weight: bold;
 
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
+
 #closeSettings {
+    border: none;
 
     background: transparent;
 
     color: white;
 
-    border: none;
-
-    font-size: 22px;
+    font-size: 20px;
 
     cursor: pointer;
+
+    transition: transform 0.15s;
 }
 
+
+#closeSettings:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+
+
 /* =========================
-   SETTINGS
+   SETTINGS ROW
 ========================= */
 
 .setting {
-
     display: flex;
-
-    justify-content: space-between;
 
     align-items: center;
 
+    justify-content: space-between;
+
     padding: 12px 0;
 
-    border-bottom: 1px solid #333;
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
 }
 
+
+/* =========================
+   TOGGLES
+========================= */
+
 .toggle {
-    position: relative;
+    min-width: 55px;
 
-    width: 70px;
-    height: 45px;
+    padding: 7px 10px;
 
-    padding: 0;
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
 
-    border: 2px solid #555;
-    border-radius: 25px;
+    border-radius: 15px;
 
-    background: #222;
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: white;
 
     cursor: pointer;
 
-    overflow: hidden;
+    font-weight: bold;
 }
 
-.toggle::before {
-    content: "";
-
-    position: absolute;
-
-    width: 38px;
-    height: 38px;
-
-    left: 2px;
-    top: 1px;
-
-    background-image: url("gubby.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    transition: left 0.2s;
-}
-
-/* ON */
 
 .toggle.active {
-    background: #444;
+    background:
+        rgba(255, 255, 255, 0.2);
 }
 
-/* Move Gubby to the right when ON */
 
-.toggle.active::before {
-    left: 27px;
-}
+/* =========================
+   NUMBER INPUT
+========================= */
 
-/* Remove the ON/OFF text */
-
-.toggle {
-    font-size: 0;
-}
 #gubbyAmount {
-
-    width: 70px;
+    width: 65px;
 
     padding: 7px;
 
-    background: #222;
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 10px;
+
+    background:
+        rgba(0, 0, 0, 0.25);
 
     color: white;
 
-    border: 2px solid #666;
-
-    border-radius: 5px;
-
-    font-size: 16px;
+    outline: none;
 }
 
-/* CLEAR BUTTON */
-
-#clearButton {
-
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 12px;
-
-    background: #222;
-
-    color: white;
-
-    border: 2px solid white;
-
-    border-radius: 7px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-#clearButton:hover {
-    background: #333;
-}
 
 /* =========================
-   GUBBY IMAGE
+   GUBBYS
 ========================= */
 
-.gubby {
+#gubbyContainer {
+    position: fixed;
 
+    inset: 0;
+
+    z-index: 100;
+}
+
+
+.gubby {
     position: absolute;
 
     width: 75px;
+
     height: 75px;
 
     object-fit: contain;
@@ -352,19 +440,160 @@ body {
     user-select: none;
 
     pointer-events: none;
+
+    will-change: transform;
 }
 
-body {
-    margin: 0;
-    overflow: hidden;
 
-    font-family: Arial, sans-serif;
-    color: white;
+/* =========================
+   GOLDEN GUBBY
+   5%
+========================= */
 
-    background-image: url("background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.gubby.golden {
+    filter:
+        sepia(1)
+        saturate(5)
+        brightness(1.3)
+        drop-shadow(0 0 10px gold);
 
-    min-height: 100vh;
+    animation:
+        goldenGlow 0.5s infinite alternate;
+}
+
+
+@keyframes goldenGlow {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.12);
+    }
+
+}
+
+
+/* =========================
+   RAINBOW GUBBY
+   1%
+========================= */
+
+.gubby.rainbow {
+    animation:
+        rainbow 1s linear infinite;
+}
+
+
+@keyframes rainbow {
+
+    0% {
+        filter:
+            hue-rotate(0deg)
+            saturate(3);
+    }
+
+    25% {
+        filter:
+            hue-rotate(90deg)
+            saturate(3);
+    }
+
+    50% {
+        filter:
+            hue-rotate(180deg)
+            saturate(3);
+    }
+
+    75% {
+        filter:
+            hue-rotate(270deg)
+            saturate(3);
+    }
+
+    100% {
+        filter:
+            hue-rotate(360deg)
+            saturate(3);
+    }
+
+}
+
+
+/* =========================
+   YOUTUBE MUSIC
+========================= */
+
+#youtubePlayer {
+    position: fixed;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    bottom: 0;
+    left: 0;
+
+    z-index: -1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        left: 10px;
+        right: 10px;
+
+        height: auto;
+
+        min-height: 58px;
+
+        padding: 8px 12px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .nav-logo {
+        font-size: 20px;
+    }
+
+
+    .nav-links {
+        gap: 2px;
+
+        flex-wrap: wrap;
+
+        justify-content: flex-end;
+    }
+
+
+    .nav-links button {
+        font-size: 12px;
+
+        padding: 8px;
+    }
+
+
+    .text-container {
+        font-size: 35px;
+
+        top: 100px;
+    }
+
+
+    #settingsMenu {
+        right: 10px;
+
+        width: calc(100% - 20px);
+    }
+
 }
