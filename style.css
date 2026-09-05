@@ -3,6 +3,11 @@
     src: url("OldRobloxFont-Regular.ttf") format("truetype");
 }
 
+
+/* =========================
+   RESET
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -10,275 +15,166 @@
 html,
 body {
     margin: 0;
+    padding: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
-    background: #090805;
+
+    background: #090909;
+
+    color: white;
+
+    font-family: "OldRoblox", Arial, sans-serif;
 }
 
+
 /* =========================
-   BACKROOMS SCENE
+   BACKGROUND
 ========================= */
 
-.scene {
-    position: fixed;
-    inset: -3%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+body {
     background-image:
         linear-gradient(
-            rgba(50, 39, 12, 0.15),
-            rgba(5, 4, 2, 0.55)
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.65)
         ),
-        url("backrooms.jpg");
+        url("background.png");
 
     background-size: cover;
     background-position: center;
-
-    animation: cameraMove 18s ease-in-out infinite alternate;
-
-    z-index: 1;
-}
-
-
-/* Slow camera movement */
-
-@keyframes cameraMove {
-
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.06);
-    }
-
+    background-repeat: no-repeat;
 }
 
 
 /* =========================
-   GUBBY
+   NAVBAR
 ========================= */
 
-.still-gubby {
-
-    position: absolute;
-
-    width: 190px;
-    height: 190px;
-
-    object-fit: contain;
-
-    user-select: none;
-    pointer-events: none;
-
-    image-rendering: auto;
-
-    filter:
-        drop-shadow(0 18px 12px rgba(0, 0, 0, 0.65))
-        brightness(0.82)
-        contrast(1.05);
-
-    animation:
-        gubbyBreathing 4s ease-in-out infinite,
-        gubbyFlicker 7s infinite;
-
-    z-index: 3;
-}
-
-
-/* Gubby slowly breathes */
-
-@keyframes gubbyBreathing {
-
-    0% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-3px) scale(1.015);
-    }
-
-    100% {
-        transform: translateY(0) scale(1);
-    }
-
-}
-
-
-/* Tiny brightness changes */
-
-@keyframes gubbyFlicker {
-
-    0%,
-    92%,
-    100% {
-        filter:
-            drop-shadow(0 18px 12px rgba(0, 0, 0, 0.65))
-            brightness(0.82)
-            contrast(1.05);
-    }
-
-    93% {
-        filter:
-            drop-shadow(0 18px 12px rgba(0, 0, 0, 0.65))
-            brightness(0.68)
-            contrast(1.15);
-    }
-
-    94% {
-        filter:
-            drop-shadow(0 18px 12px rgba(0, 0, 0, 0.65))
-            brightness(0.86)
-            contrast(1.05);
-    }
-
-}
-
-
-/* =========================
-   VIGNETTE
-========================= */
-
-.vignette {
+.navbar {
 
     position: fixed;
-    inset: 0;
+
+    top: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(
+        720px,
+        calc(100% - 30px)
+    );
+
+    min-height: 48px;
+
+    padding: 6px 8px 6px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
 
     background:
-        radial-gradient(
-            ellipse at center,
-            transparent 30%,
-            rgba(0, 0, 0, 0.2) 60%,
-            rgba(0, 0, 0, 0.8) 100%
+        linear-gradient(
+            100deg,
+            rgba(117, 64, 28, 0.94),
+            rgba(55, 47, 82, 0.94)
         );
 
-    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 
-    z-index: 10;
+    border-radius: 28px;
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.12),
+        0 0 20px rgba(130, 100, 255, 0.2),
+        0 8px 25px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(15px);
+
+    z-index: 5000;
 }
 
 
-/* =========================
-   FILM GRAIN
-========================= */
+/* Logo */
 
-.grain {
+.nav-logo {
 
-    position: fixed;
-    inset: -50%;
+    font-size: 22px;
 
-    width: 200%;
-    height: 200%;
+    font-weight: 900;
 
-    pointer-events: none;
+    white-space: nowrap;
 
-    opacity: 0.13;
-
-    background-image:
-        url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Static_Noise_Texture.png");
-
-    animation: grainMove 0.25s steps(2) infinite;
-
-    z-index: 20;
-}
-
-@keyframes grainMove {
-
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(-3%, 2%);
-    }
-
-    50% {
-        transform: translate(2%, -3%);
-    }
-
-    75% {
-        transform: translate(3%, 3%);
-    }
-
-    100% {
-        transform: translate(-2%, -2%);
-    }
-
+    text-shadow:
+        2px 2px 0 black,
+        0 0 8px rgba(255,255,255,0.3);
 }
 
 
-/* =========================
-   VHS SCANLINES
-========================= */
+/* Navigation buttons */
 
-.scanlines {
+.nav-links {
 
-    position: fixed;
-    inset: 0;
+    display: flex;
 
-    pointer-events: none;
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+}
+
+.nav-links button {
+
+    border: 1px solid rgba(255,255,255,0.15);
 
     background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.08) 0px,
-            rgba(0, 0, 0, 0.08) 1px,
-            transparent 1px,
-            transparent 4px
-        );
+        rgba(0,0,0,0.3);
 
-    opacity: 0.4;
+    color: white;
 
-    z-index: 21;
+    padding: 7px 10px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s,
+        box-shadow 0.15s;
 }
 
+.nav-links button:hover {
 
-/* =========================
-   LIGHT FLICKER
-========================= */
+    transform: translateY(-2px);
 
-.flicker {
+    background:
+        rgba(255,255,255,0.15);
 
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-
-    background: rgba(255, 220, 130, 0.025);
-
-    animation: lightFlicker 6s infinite;
-
-    z-index: 5;
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.2);
 }
 
-@keyframes lightFlicker {
+.nav-links button:active {
 
-    0%,
-    89%,
-    100% {
-        opacity: 0;
-    }
+    transform: scale(0.94);
+}
 
-    90% {
-        opacity: 0.25;
-    }
+.nav-links a {
 
-    91% {
-        opacity: 0;
-    }
-
-    94% {
-        opacity: 0.08;
-    }
-
-    95% {
-        opacity: 0;
-    }
-
+    text-decoration: none;
 }
 
 
@@ -290,101 +186,365 @@ body {
 
     position: fixed;
 
-    bottom: 35px;
+    top: 80px;
+
     left: 50%;
 
     transform: translateX(-50%);
 
-    font-family: "OldRoblox", monospace;
+    font-size: 42px;
 
-    font-size: 28px;
+    font-weight: 900;
 
-    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
 
-    letter-spacing: 5px;
+    text-align: center;
+
+    color: white;
 
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.4),
-        0 3px 10px rgba(0, 0, 0, 0.9);
+        3px 3px 0 black,
+        0 0 15px rgba(255,255,255,0.25);
 
-    animation: titleFlicker 5s infinite;
+    animation: titleShake 0.14s infinite;
 
-    z-index: 30;
+    z-index: 100;
 
     pointer-events: none;
 }
 
-@keyframes titleFlicker {
 
-    0%,
-    90%,
+@keyframes titleShake {
+
+    0% {
+        transform:
+            translateX(-50%)
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translateX(-50%)
+            translate(-2px, 1px)
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translate(2px, -1px)
+            rotate(1deg);
+    }
+
+    75% {
+        transform:
+            translateX(-50%)
+            translate(-1px, -2px)
+            rotate(0deg);
+    }
+
     100% {
-        opacity: 0.7;
+        transform:
+            translateX(-50%)
+            translate(1px, 2px)
+            rotate(1deg);
     }
-
-    91% {
-        opacity: 0.2;
-    }
-
-    92% {
-        opacity: 0.7;
-    }
-
-    94% {
-        opacity: 0.4;
-    }
-
 }
 
 
 /* =========================
-   BACK BUTTON
+   GUBBY CONTAINER
 ========================= */
 
-.back {
+#gubbyContainer {
 
     position: fixed;
 
-    top: 25px;
-    left: 25px;
+    inset: 0;
 
-    padding: 9px 16px;
+    overflow: hidden;
 
-    font-family: "OldRoblox", monospace;
+    z-index: 50;
 
-    font-size: 14px;
+    pointer-events: none;
+}
 
-    color: rgba(255, 255, 255, 0.8);
 
-    text-decoration: none;
+/* =========================
+   GUBBY
+========================= */
 
-    background: rgba(20, 18, 12, 0.65);
+.gubby {
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: absolute;
+
+    width: 75px;
+    height: 75px;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    transform-origin: center center;
+
+    will-change:
+        left,
+        top,
+        transform;
+
+    filter:
+        drop-shadow(
+            0 7px 5px
+            rgba(0,0,0,0.4)
+        );
+}
+
+
+/* =========================
+   GOLDEN GUBBY
+========================= */
+
+.gubby.golden {
+
+    filter:
+        sepia(1)
+        saturate(5)
+        brightness(1.35)
+        drop-shadow(
+            0 0 10px
+            rgba(255,215,0,0.9)
+        );
+
+    animation:
+        goldenGlow 0.7s infinite alternate;
+}
+
+
+@keyframes goldenGlow {
+
+    from {
+        filter:
+            sepia(1)
+            saturate(4)
+            brightness(1.15)
+            drop-shadow(
+                0 0 5px
+                rgba(255,215,0,0.7)
+            );
+    }
+
+    to {
+        filter:
+            sepia(1)
+            saturate(6)
+            brightness(1.4)
+            drop-shadow(
+                0 0 15px
+                rgba(255,215,0,1)
+            );
+    }
+}
+
+
+/* =========================
+   RAINBOW GUBBY
+========================= */
+
+.gubby.rainbow {
+
+    animation:
+        rainbowHue 0.8s linear infinite;
+}
+
+
+@keyframes rainbowHue {
+
+    0% {
+        filter:
+            hue-rotate(0deg)
+            saturate(2);
+    }
+
+    100% {
+        filter:
+            hue-rotate(360deg)
+            saturate(2);
+    }
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-menu {
+
+    position: fixed;
+
+    top: 68px;
+    left: 50%;
+
+    width: 320px;
+
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 25, 48, 0.97),
+            rgba(15, 12, 22, 0.97)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.16);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.6),
+        0 0 25px
+        rgba(130,100,255,0.18);
+
+    backdrop-filter: blur(15px);
+
+    transform:
+        translate(-50%, -15px)
+        scale(0.95);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+
+    z-index: 6000;
+}
+
+
+.settings-menu.open {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+
+/* Header */
+
+.settings-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+    font-size: 20px;
+}
+
+
+.settings-header button {
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
 
     border-radius: 8px;
 
-    backdrop-filter: blur(8px);
-
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.4);
-
-    transition:
-        transform 0.2s,
-        background 0.2s,
-        color 0.2s;
-
-    z-index: 50;
-}
-
-.back:hover {
-
-    transform: translateY(-2px);
-
-    background: rgba(40, 35, 20, 0.85);
+    background:
+        rgba(255,255,255,0.1);
 
     color: white;
 
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+/* Settings row */
+
+.setting {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px 4px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    font-size: 14px;
+}
+
+
+/* Toggle */
+
+.toggle {
+
+    min-width: 52px;
+
+    padding: 6px 10px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        #3a3a3a;
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.toggle.active {
+
+    background:
+        #4f9d50;
+}
+
+
+/* Number input */
+
+#gubbyAmount {
+
+    width: 75px;
+
+    padding: 6px;
+
+    border: 1px solid
+        rgba(255,255,255,0.2);
+
+    border-radius: 7px;
+
+    background: #111;
+
+    color: white;
+
+    font-family: inherit;
 }
 
 
@@ -392,21 +552,54 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .still-gubby {
-        width: 140px;
-        height: 140px;
+    .navbar {
+
+        width:
+            calc(100% - 12px);
+
+        border-radius: 16px;
+
+        align-items: flex-start;
+    }
+
+    .nav-logo {
+
+        display: none;
+    }
+
+    .nav-links {
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .nav-links button {
+
+        font-size: 10px;
+
+        padding:
+            6px 7px;
     }
 
     .title {
-        font-size: 21px;
-        letter-spacing: 3px;
+
+        top: 75px;
+
+        font-size: 28px;
     }
 
-    .back {
-        top: 15px;
-        left: 15px;
+    .settings-menu {
+
+        width:
+            calc(100% - 30px);
     }
 
+    .gubby {
+
+        width: 60px;
+        height: 60px;
+    }
 }
