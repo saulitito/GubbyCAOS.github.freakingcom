@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>..?</title>
+    <title>STILL LIFE</title>
 
     <link rel="stylesheet" href="still-life.css">
-
 </head>
-
 
 <body>
 
-    <div class="grain"></div>
-
+    <!-- Background -->
     <div class="scene">
 
+        <!-- Gubby -->
         <img
             src="gubby.png"
             class="still-gubby"
@@ -29,20 +23,50 @@
 
     </div>
 
+    <!-- Dark overlay -->
+    <div class="vignette"></div>
 
-    <div class="text">
+    <!-- VHS effects -->
+    <div class="scanlines"></div>
+    <div class="grain"></div>
+
+    <!-- Flickering light -->
+    <div class="flicker"></div>
+
+    <!-- Title -->
+    <div class="title">
         STILL LIFE
     </div>
 
-
-    <a
-        href="index.html"
-        class="back"
-    >
+    <!-- Back button -->
+    <a href="index.html" class="back">
         ← GO BACK
     </a>
 
+    <!-- Music -->
+    <audio
+        id="backroomsAudio"
+        src="backrooms.mp3"
+        autoplay
+        loop
+    ></audio>
+
+    <script>
+        const audio = document.getElementById("backroomsAudio");
+
+        /*
+            Browsers sometimes block autoplay with sound.
+            If that happens, the first click anywhere starts it.
+        */
+
+        audio.volume = 0.65;
+
+        document.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play().catch(() => {});
+            }
+        }, { once: true });
+    </script>
 
 </body>
-
 </html>
