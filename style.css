@@ -46,36 +46,39 @@ body {
     transform: scale(0.95);
 }
 
-.title {
+.text-container {
     position: absolute;
-
-    top: 15px;
+    top: 20px;
     left: 50%;
-
     transform: translateX(-50%);
-
-    margin: 0;
 
     font-size: 48px;
     font-weight: 900;
+    white-space: nowrap;
 
     z-index: 1000;
-
-    animation: titleShake 0.12s infinite;
 }
 
-@keyframes titleShake {
+.wavy-text {
+    display: inline-block;
+    animation: wavy 1.2s ease-in-out infinite;
+}
 
-    0% {
-        transform: translateX(-50%) rotate(-1deg);
+@keyframes wavy {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    25% {
+        transform: translateY(-8px) rotate(2deg);
     }
 
     50% {
-        transform: translateX(-50%) rotate(1deg);
+        transform: translateY(0) rotate(-2deg);
     }
 
-    100% {
-        transform: translateX(-50%) rotate(-1deg);
+    75% {
+        transform: translateY(8px) rotate(2deg);
     }
 }
 
