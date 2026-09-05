@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GUBBY FULL CAOS</title>
 
-    <!-- Favicon -->
+    <!-- Website icon -->
     <link rel="icon" type="image/png" href="icon.png">
 
     <!-- Old Roblox Font -->
@@ -15,41 +16,51 @@
         @font-face {
             font-family: "OldRoblox";
             src: url("OldRobloxFont-Regular.ttf") format("truetype");
-            font-weight: normal;
-            font-style: normal;
         }
     </style>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+
+    <!-- =====================================
+         TOP NAVBAR
+    ====================================== -->
 
     <nav class="navbar">
 
+        <!-- Logo -->
         <div class="nav-logo">
             GUBBY
         </div>
 
+
+        <!-- Buttons -->
         <div class="nav-links">
 
             <button id="gubbyButton">
-                Release Gubbys
+                RELEASE GUBBYS
             </button>
+
 
             <button id="settingsButton">
-                ⚙ Settings
+                ⚙ SETTINGS
             </button>
+
 
             <button id="clearButton">
-                🧹 Clear
+                🧹 CLEAR
             </button>
 
-            <a href="https://isthatagubby.neocities.com/" target="_blank">
+
+            <a
+                href="https://isthatagubby.neocities.com/"
+                target="_blank"
+            >
                 <button>
                     Go to Gubhub🤑
                 </button>
@@ -60,9 +71,10 @@
     </nav>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          TITLE
-    ========================== -->
+    ====================================== -->
 
     <div class="text-container">
 
@@ -73,11 +85,13 @@
     </div>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          SETTINGS
-    ========================== -->
+    ====================================== -->
 
     <div id="settingsMenu">
+
 
         <div class="settingsHeader">
 
@@ -92,17 +106,22 @@
         </div>
 
 
+
         <div class="setting">
 
             <span>
                 🔊 Sounds
             </span>
 
-            <button class="toggle active" id="soundToggle">
+            <button
+                class="toggle active"
+                id="soundToggle"
+            >
                 ON
             </button>
 
         </div>
+
 
 
         <div class="setting">
@@ -111,11 +130,15 @@
                 🌎 Gravity
             </span>
 
-            <button class="toggle active" id="gravityToggle">
+            <button
+                class="toggle active"
+                id="gravityToggle"
+            >
                 ON
             </button>
 
         </div>
+
 
 
         <div class="setting">
@@ -124,11 +147,15 @@
                 💥 Wall Bounce
             </span>
 
-            <button class="toggle active" id="bounceToggle">
+            <button
+                class="toggle active"
+                id="bounceToggle"
+            >
                 ON
             </button>
 
         </div>
+
 
 
         <div class="setting">
@@ -148,13 +175,17 @@
         </div>
 
 
+
         <div class="setting">
 
             <span>
                 ⚡ Chaos Mode
             </span>
 
-            <button class="toggle" id="chaosToggle">
+            <button
+                class="toggle"
+                id="chaosToggle"
+            >
                 OFF
             </button>
 
@@ -163,30 +194,37 @@
     </div>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          GUBBY CONTAINER
-    ========================== -->
+    ====================================== -->
 
     <div id="gubbyContainer"></div>
 
 
-    <!-- =========================
-         GUBBY SOUND
-    ========================== -->
 
-    <audio id="gubbySound" src="gubby.mp3"></audio>
+    <!-- =====================================
+         WALL SOUND
+    ====================================== -->
+
+    <audio
+        id="gubbySound"
+        src="gubby.mp3"
+    ></audio>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          YOUTUBE MUSIC
-    ========================== -->
+    ====================================== -->
 
     <iframe
         id="youtubePlayer"
         src="https://www.youtube.com/embed/b12dBv7EDjU?autoplay=1&loop=1&playlist=b12dBv7EDjU"
         allow="autoplay; encrypted-media"
-        frameborder="0">
-    </iframe>
+        frameborder="0"
+    ></iframe>
+
 
 
     <script src="script.js"></script>
