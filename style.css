@@ -315,3 +315,18 @@ body {
 
     pointer-events: none;
 }
+
+body {
+    margin: 0;
+    overflow: hidden;
+
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+}
