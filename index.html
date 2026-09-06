@@ -2,33 +2,25 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GUBBY FULL CAOS</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
     <!-- =====================================
          NAVBAR
-         ===================================== -->
+    ====================================== -->
 
     <nav class="navbar">
 
         <div class="nav-logo">
-            GUBBY
+            GUBBY.CAOS
         </div>
-
 
         <div class="nav-links">
 
@@ -36,24 +28,17 @@
                 ⚙ SETTINGS
             </button>
 
-
             <button id="clearButton">
                 🧹 CLEAR
             </button>
 
+            <button id="gubhubButton">
+                🏠 GUBHUB
+            </button>
 
-            <a href="still-life.html">
-                <button>
-                    STILL LIFE
-                </button>
-            </a>
-
-
-            <a href="my-singing-gubby.html">
-                <button>
-                    🎵 MY SINGING GUBBY
-                </button>
-            </a>
+            <button id="stillLifeButton">
+                ..?
+            </button>
 
         </div>
 
@@ -61,24 +46,8 @@
 
 
     <!-- =====================================
-         TITLE
-         ===================================== -->
-
-    <div class="title">
-        GUBBY FULL CAOS
-    </div>
-
-
-    <!-- =====================================
-         GUBBY CONTAINER
-         ===================================== -->
-
-    <div id="gubbyContainer"></div>
-
-
-    <!-- =====================================
-         SETTINGS MENU
-         ===================================== -->
+         SETTINGS
+    ====================================== -->
 
     <div
         id="settingsMenu"
@@ -88,7 +57,7 @@
         <div class="settings-header">
 
             <span>
-                SETTINGS
+                GUBBY SETTINGS
             </span>
 
             <button id="closeSettings">
@@ -101,48 +70,48 @@
         <div class="setting">
 
             <span>
-                Gubby Amount
+                ✨ Golden Gubbys
+            </span>
+
+            <button
+                id="goldenToggle"
+                class="toggle active"
+            >
+                ON
+            </button>
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>
+                🌈 Rainbow Gubbys
+            </span>
+
+            <button
+                id="rainbowToggle"
+                class="toggle active"
+            >
+                ON
+            </button>
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>
+                💀 Starting Gubbys
             </span>
 
             <input
                 id="gubbyAmount"
                 type="number"
                 min="1"
-                max="200"
-                value="30"
+                max="100"
+                value="25"
             >
-
-        </div>
-
-
-        <div class="setting">
-
-            <span>
-                Golden Gubbys
-            </span>
-
-            <button
-                id="goldenToggle"
-                class="toggle"
-            >
-                OFF
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <span>
-                Rainbow Gubbys
-            </span>
-
-            <button
-                id="rainbowToggle"
-                class="toggle"
-            >
-                OFF
-            </button>
 
         </div>
 
@@ -150,20 +119,31 @@
 
 
     <!-- =====================================
+         TITLE
+    ====================================== -->
+
+    <h1 class="title">
+        GUBBY FULL CAOS
+    </h1>
+
+
+    <!-- =====================================
+         GUBBY CONTAINER
+    ====================================== -->
+
+    <div id="gubbyContainer"></div>
+
+
+    <!-- =====================================
          COMMENTS
-         ===================================== -->
+    ====================================== -->
 
-    <section
-        id="commentsSection"
-        class="comments-section"
-    >
+    <section class="comments-section">
 
-        <div class="comments-title">
-            💬 GUBBY COMMENTS
-        </div>
+        <h2 class="comments-title">
+            GUBBY COMMENTS
+        </h2>
 
-
-        <!-- Comment form -->
 
         <div class="comment-form">
 
@@ -171,58 +151,52 @@
                 id="commentName"
                 type="text"
                 maxlength="30"
-                placeholder="Your name..."
+                placeholder="Your Gubby name..."
+                autocomplete="off"
             >
 
 
             <textarea
                 id="commentText"
                 maxlength="300"
-                placeholder="Say something about the Gubbys..."
+                placeholder="Say something to the Gubby universe..."
             ></textarea>
 
 
             <button id="postComment">
-                POST COMMENT
+                💬 POST COMMENT
             </button>
 
         </div>
 
 
-        <!-- Messages -->
-
-        <div
-            id="commentMessage"
-            class="comment-message"
-        ></div>
-
-
-        <!-- Comments appear here -->
-
         <div
             id="commentsList"
             class="comments-list"
         >
-
-            <div class="loading-comments">
-                Loading Gubby comments...
-            </div>
-
+            <!-- Comments appear here -->
         </div>
 
     </section>
 
 
     <!-- =====================================
-         FIREBASE
-         ===================================== -->
+         MAIN SCRIPT
+    ====================================== -->
+
+    <script src="script.js"></script>
+
+
+    <!-- =====================================
+         FIREBASE COMMENTS
+    ====================================== -->
 
     <script type="module">
 
         import {
             initializeApp
-        } from
-        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        }
+        from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 
         import {
@@ -233,17 +207,18 @@
             orderBy,
             onSnapshot,
             serverTimestamp
-        } from
-        "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+        }
+        from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
         // =====================================
-        // PUT YOUR FIREBASE CONFIG HERE
+        // FIREBASE CONFIG
         // =====================================
 
         const firebaseConfig = {
 
-            apiKey: "YOUR_API_KEY",
+            apiKey:
+                "YOUR_API_KEY",
 
             authDomain:
                 "YOUR_PROJECT.firebaseapp.com",
@@ -264,7 +239,7 @@
 
 
         // =====================================
-        // FIREBASE START
+        // START FIREBASE
         // =====================================
 
         const app =
@@ -278,22 +253,22 @@
 
 
         // =====================================
-        // HTML
+        // ELEMENTS
         // =====================================
 
-        const commentName =
+        const nameInput =
             document.getElementById(
                 "commentName"
             );
 
 
-        const commentText =
+        const textInput =
             document.getElementById(
                 "commentText"
             );
 
 
-        const postComment =
+        const postButton =
             document.getElementById(
                 "postComment"
             );
@@ -305,65 +280,56 @@
             );
 
 
-        const commentMessage =
-            document.getElementById(
-                "commentMessage"
-            );
-
-
         // =====================================
         // POST COMMENT
         // =====================================
 
-        postComment.onclick =
+        postButton.addEventListener(
+            "click",
             async () => {
 
                 const name =
-                    commentName.value.trim();
+                    nameInput.value.trim();
 
 
                 const text =
-                    commentText.value.trim();
+                    textInput.value.trim();
 
 
-                // Check name
-                if (!name) {
+                if (!name || !text) {
 
-                    commentMessage.textContent =
-                        "Please enter your name 😭";
-
-                    return;
-                }
-
-
-                // Check comment
-                if (!text) {
-
-                    commentMessage.textContent =
-                        "Write something first 😭";
+                    alert(
+                        "Your Gubby needs a name AND a comment! 😭"
+                    );
 
                     return;
                 }
 
 
-                // Prevent huge names
-                if (
-                    name.length > 30
-                ) {
+                if (name.length > 30) {
 
-                    commentMessage.textContent =
-                        "Name is too long!";
+                    alert(
+                        "Gubby name is too long!"
+                    );
 
                     return;
                 }
 
 
-                postComment.disabled =
-                    true;
+                if (text.length > 300) {
+
+                    alert(
+                        "Comment is too long!"
+                    );
+
+                    return;
+                }
 
 
-                commentMessage.textContent =
-                    "Posting...";
+                postButton.disabled = true;
+
+                postButton.textContent =
+                    "POSTING...";
 
 
                 try {
@@ -386,36 +352,38 @@
                     );
 
 
-                    commentName.value =
-                        "";
+                    nameInput.value = "";
 
-                    commentText.value =
-                        "";
+                    textInput.value = "";
 
 
-                    commentMessage.textContent =
-                        "Comment posted! 🎉";
-
-
-                } catch (error) {
+                }
+                catch (error) {
 
                     console.error(
+                        "Comment error:",
                         error
                     );
 
 
-                    commentMessage.textContent =
-                        "Couldn't post comment 😭";
+                    alert(
+                        "Gubby tripped over the database 💀"
+                    );
+
                 }
 
 
-                postComment.disabled =
-                    false;
-            };
+                postButton.disabled = false;
+
+                postButton.textContent =
+                    "💬 POST COMMENT";
+
+            }
+        );
 
 
         // =====================================
-        // LOAD COMMENTS
+        // LOAD COMMENTS LIVE
         // =====================================
 
         const commentsQuery =
@@ -435,23 +403,7 @@
             commentsQuery,
             snapshot => {
 
-                commentsList.innerHTML =
-                    "";
-
-
-                if (
-                    snapshot.empty
-                ) {
-
-                    commentsList.innerHTML = `
-                        <div class="loading-comments">
-                            No comments yet...
-                            Be the first Gubby! 🗿
-                        </div>
-                    `;
-
-                    return;
-                }
+                commentsList.innerHTML = "";
 
 
                 snapshot.forEach(
@@ -461,81 +413,39 @@
                             doc.data();
 
 
+                        // Comment card
                         const comment =
                             document.createElement(
                                 "div"
                             );
 
-
                         comment.className =
                             "comment";
 
 
-                        const header =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        header.className =
-                            "comment-header";
-
-
+                        // Username
                         const name =
                             document.createElement(
                                 "strong"
                             );
 
-
                         name.textContent =
-                            data.name ||
-                            "Anonymous";
+                            "🗣️ " +
+                            (data.name || "Unknown Gubby");
 
 
-                        const date =
-                            document.createElement(
-                                "span"
-                            );
-
-
-                        if (
-                            data.createdAt
-                        ) {
-
-                            date.textContent =
-                                data.createdAt
-                                    .toDate()
-                                    .toLocaleString();
-                        }
-
-
+                        // Comment text
                         const text =
                             document.createElement(
-                                "div"
+                                "p"
                             );
 
-
-                        text.className =
-                            "comment-text";
-
-
                         text.textContent =
-                            data.text ||
-                            "";
-
-
-                        header.appendChild(
-                            name
-                        );
-
-
-                        header.appendChild(
-                            date
-                        );
+                            data.text || "";
 
 
                         comment.appendChild(
-                            header
+                            name
                         );
 
 
@@ -552,31 +462,17 @@
                 );
 
             },
-
             error => {
 
                 console.error(
-                    "Comment loading error:",
+                    "Comment listener error:",
                     error
                 );
 
-
-                commentsList.innerHTML = `
-                    <div class="loading-comments">
-                        Couldn't load comments 😭
-                    </div>
-                `;
             }
         );
 
     </script>
-
-
-    <!-- =====================================
-         MAIN GAME SCRIPT
-         ===================================== -->
-
-    <script src="script.js"></script>
 
 </body>
 
