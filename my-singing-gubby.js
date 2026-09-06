@@ -2,36 +2,25 @@
 // MY SINGING GUBBY
 // ============================================
 
-
-// ============================================
-// CONFIG
-// ============================================
-
 const STARTING_COINS = 10;
-
 const MAX_SLOTS = 6;
 
-const SAVE_KEY =
-    "MY_SINGING_GUBBY_SAVE_V2";
+const COIN_INTERVAL = 10000; // 10 seconds
 
+const SAVE_KEY = "MY_SINGING_GUBBY_SAVE_V2";
 
 const PRICES = {
-
     normal: 5,
-
     golden: 15
-
 };
 
 
 // ============================================
-// DEFAULT SAVE
+// SAVE DATA
 // ============================================
 
 function createNewSave() {
-
     return {
-
         coins: STARTING_COINS,
 
         inventory: [],
@@ -44,145 +33,97 @@ function createNewSave() {
             null,
             null
         ]
-
     };
-
 }
 
-
-// ============================================
-// LOAD SAVE
-// ============================================
 
 function loadGame() {
 
     const saved =
-        localStorage.getItem(
-            SAVE_KEY
-        );
-
-
-    // NEW PLAYER
+        localStorage.getItem(SAVE_KEY);
 
     if (!saved) {
 
         const newSave =
             createNewSave();
 
-
         localStorage.setItem(
             SAVE_KEY,
             JSON.stringify(newSave)
         );
 
-
         return newSave;
-
     }
-
-
-    // EXISTING PLAYER
 
     try {
 
         const data =
             JSON.parse(saved);
 
+        let placed =
+            Array.isArray(data.placed)
+                ? data.placed
+                : createNewSave().placed;
+
+        // Make sure there are exactly 6 slots
+        placed = placed.slice(0, MAX_SLOTS);
+
+        while (placed.length < MAX_SLOTS) {
+            placed.push(null);
+        }
 
         return {
 
             coins:
                 typeof data.coins === "number"
-                    ? Math.max(
-                        0,
-                        data.coins
-                    )
+                    ? Math.max(0, data.coins)
                     : STARTING_COINS,
 
-
             inventory:
-                Array.isArray(
-                    data.inventory
-                )
+                Array.isArray(data.inventory)
                     ? data.inventory
                     : [],
 
-
-            placed:
-                Array.isArray(
-                    data.placed
-                )
-                    ? data.placed
-                    : createNewSave().placed
-
+            placed: placed
         };
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.warn(
             "Invalid save. Creating new game."
         );
 
-
         return createNewSave();
-
     }
-
 }
 
 
-// ============================================
-// GAME DATA
-// ============================================
+let game = loadGame();
 
-let game =
-    loadGame();
-
-
-let selectedInventoryIndex =
-    null;
+let selectedInventoryIndex = null;
 
 
 // ============================================
-// HTML
+// HTML ELEMENTS
 // ============================================
 
 const coinAmount =
-    document.getElementById(
-        "coinAmount"
-    );
-
+    document.getElementById("coinAmount");
 
 const inventory =
-    document.getElementById(
-        "inventory"
-    );
-
+    document.getElementById("inventory");
 
 const inventoryMessage =
-    document.getElementById(
-        "inventoryMessage"
-    );
-
+    document.getElementById("inventoryMessage");
 
 const islandMessage =
-    document.getElementById(
-        "islandMessage"
-    );
-
+    document.getElementById("islandMessage");
 
 const shopPanel =
-    document.getElementById(
-        "shopPanel"
-    );
-
+    document.getElementById("shopPanel");
 
 const inventoryPanel =
-    document.getElementById(
-        "inventoryPanel"
-    );
+    document.getElementById("inventoryPanel");
 
 
 // ============================================
@@ -192,27 +133,20 @@ const inventoryPanel =
 function saveGame() {
 
     localStorage.setItem(
-
         SAVE_KEY,
-
         JSON.stringify(game)
-
     );
-
 }
 
 
 // ============================================
-// COINS
+// COINS DISPLAY
 // ============================================
 
 function updateCoins() {
 
     coinAmount.textContent =
-        Math.floor(
-            game.coins
-        );
-
+        Math.floor(game.coins);
 }
 
 
@@ -222,42 +156,23 @@ function updateCoins() {
 
 function buyGubby(type) {
 
-    const price =
-        PRICES[type];
+    const price = PRICES[type];
 
-
-    if (
-        price === undefined
-    ) {
-
+    if (price === undefined) {
         return;
-
     }
 
-
-    if (
-        game.coins < price
-    ) {
+    if (game.coins < price) {
 
         islandMessage.textContent =
             "You don't have enough coins 😭";
 
         return;
-
     }
-
-
-    // Pay
 
     game.coins -= price;
 
-
-    // Add to inventory
-
-    game.inventory.push(
-        type
-    );
-
+    game.inventory.push(type);
 
     saveGame();
 
@@ -265,10 +180,22 @@ function buyGubby(type) {
 
     renderInventory();
 
-
     islandMessage.textContent =
         "New Gubby added to your inventory! 🎉";
+}
 
+
+// ============================================
+// GUBBY NAME
+// ============================================
+
+function getGubbyName(type) {
+
+    if (type === "golden") {
+        return "Golden Gubby";
+    }
+
+    return "Normal Gubby";
 }
 
 
@@ -280,10 +207,7 @@ function renderInventory() {
 
     inventory.innerHTML = "";
 
-
-    if (
-        game.inventory.length === 0
-    ) {
+    if (game.inventory.length === 0) {
 
         inventory.innerHTML = `
             <div style="
@@ -298,7 +222,6 @@ function renderInventory() {
         `;
 
         return;
-
     }
 
 
@@ -306,10 +229,7 @@ function renderInventory() {
         (type, index) => {
 
             const item =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             item.className =
                 "inventory-item";
@@ -319,67 +239,43 @@ function renderInventory() {
                 selectedInventoryIndex === index
             ) {
 
-                item.classList.add(
-                    "selected"
-                );
-
+                item.classList.add("selected");
             }
 
 
             const image =
-                document.createElement(
-                    "img"
-                );
+                document.createElement("img");
+
+            image.src = "gubby.png";
 
 
-            image.src =
-                "gubby.png";
+            if (type === "golden") {
 
-
-            if (
-                type === "golden"
-            ) {
-
-                image.classList.add(
-                    "golden"
-                );
-
+                image.classList.add("golden");
             }
 
 
             const name =
-                document.createElement(
-                    "span"
-                );
-
+                document.createElement("span");
 
             name.textContent =
                 getGubbyName(type);
 
 
-            item.appendChild(
-                image
-            );
+            item.appendChild(image);
 
-            item.appendChild(
-                name
-            );
+            item.appendChild(name);
 
 
             item.onclick = () => {
 
                 selectGubby(index);
-
             };
 
 
-            inventory.appendChild(
-                item
-            );
-
+            inventory.appendChild(item);
         }
     );
-
 }
 
 
@@ -389,9 +285,14 @@ function renderInventory() {
 
 function selectGubby(index) {
 
+    if (
+        !game.inventory[index]
+    ) {
+        return;
+    }
+
     selectedInventoryIndex =
         index;
-
 
     const type =
         game.inventory[index];
@@ -409,27 +310,6 @@ function selectGubby(index) {
     renderInventory();
 
     highlightSlots();
-
-}
-
-
-// ============================================
-// NAMES
-// ============================================
-
-function getGubbyName(type) {
-
-    if (
-        type === "golden"
-    ) {
-
-        return "Golden Gubby";
-
-    }
-
-
-    return "Normal Gubby";
-
 }
 
 
@@ -440,9 +320,7 @@ function getGubbyName(type) {
 function renderIsland() {
 
     const slots =
-        document.querySelectorAll(
-            ".slot"
-        );
+        document.querySelectorAll(".slot");
 
 
     slots.forEach(
@@ -460,80 +338,54 @@ function renderIsland() {
 
 
             // EMPTY SLOT
-
             if (!type) {
 
                 const plus =
-                    document.createElement(
-                        "span"
-                    );
+                    document.createElement("span");
 
-                plus.textContent =
-                    "+";
+                plus.textContent = "+";
 
-
-                slot.appendChild(
-                    plus
-                );
-
+                slot.appendChild(plus);
 
                 return;
-
             }
 
 
             // GUBBY
-
             const image =
-                document.createElement(
-                    "img"
-                );
+                document.createElement("img");
 
-
-            image.src =
-                "gubby.png";
-
+            image.src = "gubby.png";
 
             image.className =
                 "placed-gubby";
 
 
-            if (
-                type === "golden"
-            ) {
+            if (type === "golden") {
 
-                image.classList.add(
-                    "golden"
-                );
-
+                image.classList.add("golden");
             }
 
 
-            /*
-                Clicking a placed Gubby
-                returns it to inventory.
-            */
-
+            // CLICK GUBBY TO REMOVE
             image.onclick = (event) => {
 
                 event.stopPropagation();
 
 
-                game.inventory.push(
-                    type
-                );
+                // Return Gubby to inventory
+                game.inventory.push(type);
 
 
-                game.placed[index] =
-                    null;
+                // Remove from island
+                game.placed[index] = null;
 
 
-                selectedInventoryIndex =
-                    null;
+                // Clear selection
+                selectedInventoryIndex = null;
 
 
                 saveGame();
-
 
                 renderInventory();
 
@@ -542,20 +394,15 @@ function renderIsland() {
 
                 islandMessage.textContent =
                     "Gubby returned to inventory.";
-
             };
 
 
-            slot.appendChild(
-                image
-            );
-
+            slot.appendChild(image);
         }
     );
 
 
     highlightSlots();
-
 }
 
 
@@ -573,16 +420,12 @@ function placeGubby(slotIndex) {
             "Select a Gubby from your inventory first!";
 
         return;
-
     }
 
 
-    if (
-        game.placed[slotIndex]
-    ) {
-
+    // Slot already occupied
+    if (game.placed[slotIndex]) {
         return;
-
     }
 
 
@@ -598,25 +441,20 @@ function placeGubby(slotIndex) {
             null;
 
         return;
-
     }
 
 
-    // Place
-
+    // Put Gubby into slot
     game.placed[slotIndex] =
         type;
 
 
     // Remove from inventory
-
     game.inventory.splice(
         selectedInventoryIndex,
         1
     );
 
-
-    // Clear selection
 
     selectedInventoryIndex =
         null;
@@ -632,24 +470,20 @@ function placeGubby(slotIndex) {
 
     saveGame();
 
-
     renderInventory();
 
     renderIsland();
-
 }
 
 
 // ============================================
-// SLOT HIGHLIGHTING
+// SLOT HIGHLIGHT
 // ============================================
 
 function highlightSlots() {
 
     const slots =
-        document.querySelectorAll(
-            ".slot"
-        );
+        document.querySelectorAll(".slot");
 
 
     slots.forEach(
@@ -668,17 +502,14 @@ function highlightSlots() {
                 slot.classList.add(
                     "can-place"
                 );
-
             }
-
         }
     );
-
 }
 
 
 // ============================================
-// SLOT CLICKING
+// SLOT CLICK EVENTS
 // ============================================
 
 document
@@ -688,12 +519,8 @@ document
 
             slot.onclick = () => {
 
-                placeGubby(
-                    index
-                );
-
+                placeGubby(index);
             };
-
         }
     );
 
@@ -704,52 +531,37 @@ document
 
 function openPanel(panel) {
 
-    shopPanel.classList.remove(
-        "open"
-    );
+    shopPanel.classList.remove("open");
 
-    inventoryPanel.classList.remove(
-        "open"
-    );
+    inventoryPanel.classList.remove("open");
 
-
-    panel.classList.add(
-        "open"
-    );
-
+    panel.classList.add("open");
 }
 
 
+// SHOP BUTTON
 document
     .getElementById("shopButton")
     .onclick = () => {
 
-        openPanel(
-            shopPanel
-        );
-
+        openPanel(shopPanel);
     };
 
 
+// INVENTORY BUTTON
 document
     .getElementById("inventoryButton")
     .onclick = () => {
 
-        openPanel(
-            inventoryPanel
-        );
+        openPanel(inventoryPanel);
 
         renderInventory();
-
     };
 
 
 // CLOSE BUTTONS
-
 document
-    .querySelectorAll(
-        ".close-button"
-    )
+    .querySelectorAll(".close-button")
     .forEach(
         button => {
 
@@ -760,13 +572,13 @@ document
                         button.dataset.panel
                     );
 
+                if (panel) {
 
-                panel.classList.remove(
-                    "open"
-                );
-
+                    panel.classList.remove(
+                        "open"
+                    );
+                }
             };
-
         }
     );
 
@@ -779,20 +591,16 @@ function singGubby(type) {
 
     const sound =
         type === "golden"
-
             ? document.getElementById(
                 "goldenSound"
             )
-
             : document.getElementById(
                 "normalSound"
             );
 
 
     if (!sound) {
-
         return;
-
     }
 
 
@@ -804,12 +612,9 @@ function singGubby(type) {
     );
 
 
-    // Animate every Gubby
-
+    // Animate every placed Gubby
     document
-        .querySelectorAll(
-            ".placed-gubby"
-        )
+        .querySelectorAll(".placed-gubby")
         .forEach(
             gubby => {
 
@@ -828,15 +633,13 @@ function singGubby(type) {
                     },
                     500
                 );
-
             }
         );
-
 }
 
 
 // ============================================
-// AUTOMATIC SINGING
+// RANDOM SINGING
 // ============================================
 
 function singingLoop() {
@@ -852,7 +655,6 @@ function singingLoop() {
     ) {
 
         return;
-
     }
 
 
@@ -868,10 +670,10 @@ function singingLoop() {
 
 
     singGubby(type);
-
 }
 
 
+// Gubbys sing every 3 seconds
 setInterval(
     singingLoop,
     3000
@@ -884,43 +686,35 @@ setInterval(
 
 function generateCoins() {
 
-    let amount = 0;
+    let earned = 0;
 
 
+    // Check EVERY island slot
     game.placed.forEach(
         type => {
 
-            if (
-                type === "normal"
-            ) {
+            if (type === "normal") {
 
-                amount += 1;
-
+                earned += 1;
             }
 
+            else if (type === "golden") {
 
-            if (
-                type === "golden"
-            ) {
-
-                amount += 3;
-
+                earned += 3;
             }
-
         }
     );
 
 
-    if (
-        amount <= 0
-    ) {
+    // No Gubbys = no coins
+    if (earned <= 0) {
 
         return;
-
     }
 
 
-    game.coins += amount;
+    // GIVE COINS
+    game.coins += earned;
 
 
     updateCoins();
@@ -929,21 +723,23 @@ function generateCoins() {
 
 
     islandMessage.textContent =
-        `Your Gubbys earned 🪙 ${amount}!`;
-
+        `Your Gubbys earned 🪙 ${earned}!`;
 }
 
 
-// Every 10 seconds
+// ============================================
+// IMPORTANT:
+// THIS RUNS FOREVER
+// ============================================
 
 setInterval(
     generateCoins,
-    10000
+    COIN_INTERVAL
 );
 
 
 // ============================================
-// START
+// INITIALIZE GAME
 // ============================================
 
 updateCoins();
@@ -957,12 +753,14 @@ renderIsland();
 // AUTO SAVE
 // ============================================
 
+// Backup save every 5 seconds
 setInterval(
     saveGame,
     5000
 );
 
 
+// Save when leaving page
 window.addEventListener(
     "beforeunload",
     saveGame
