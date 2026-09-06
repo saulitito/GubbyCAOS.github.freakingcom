@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GUBBY COMMENTS</title>
+
+    <link
+        rel="stylesheet"
+        href="comments.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="comments-page">
+
+        <header class="comments-header">
+
+            <a
+                href="index.html"
+                class="back-button"
+            >
+                ← BACK TO CAOS
+            </a>
+
+            <div>
+
+                <span>
+                    GUBBY COMMUNITY
+                </span>
+
+                <h1>
+                    💬 COMMENTS
+                </h1>
+
+            </div>
+
+        </header>
+
+
+        <section class="comment-box">
+
+            <div class="box-title">
+                SAY SOMETHING
+            </div>
+
+
+            <input
+                id="commentName"
+                maxlength="30"
+                placeholder="Your Gubby name..."
+                autocomplete="off"
+            >
+
+
+            <textarea
+                id="commentText"
+                maxlength="300"
+                placeholder="What do you have to say?"
+            ></textarea>
+
+
+            <button id="postComment">
+                💬 POST COMMENT
+            </button>
+
+        </section>
+
+
+        <section class="comments-container">
+
+            <div class="comments-heading">
+
+                <span>
+                    RECENT GUBBY SPEECH
+                </span>
+
+                <span
+                    id="commentCount"
+                    class="comment-count"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <div
+                id="commentsList"
+                class="comments-list"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="comments.js"
+    ></script>
+
+</body>
+
+</html>
