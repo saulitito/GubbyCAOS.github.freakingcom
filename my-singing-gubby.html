@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,26 +14,28 @@
 
     <!-- TOP BAR -->
 
-    <div class="topbar">
+    <header class="topbar">
 
-        <a href="index.html" class="back">
+        <a href="index.html" class="back-button">
             ← BACK
         </a>
 
-        <div class="title">
+        <div class="game-title">
             MY SINGING GUBBY
         </div>
 
         <div class="coin-display">
-            🪙 <span id="coins">10</span>
+            🪙 <span id="coinAmount">10</span>
         </div>
 
-    </div>
+    </header>
 
 
-    <!-- ISLAND -->
+    <!-- GAME -->
 
     <main>
+
+        <!-- ISLAND -->
 
         <section class="island">
 
@@ -40,27 +43,44 @@
                 YOUR ISLAND
             </div>
 
-            <div id="gubbySlots">
+            <div id="slots" class="slots">
 
-                <div class="gubby-slot" data-slot="0"></div>
-                <div class="gubby-slot" data-slot="1"></div>
-                <div class="gubby-slot" data-slot="2"></div>
-                <div class="gubby-slot" data-slot="3"></div>
-                <div class="gubby-slot" data-slot="4"></div>
-                <div class="gubby-slot" data-slot="5"></div>
+                <div class="slot" data-slot="0">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" data-slot="1">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" data-slot="2">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" data-slot="3">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" data-slot="4">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" data-slot="5">
+                    <span>+</span>
+                </div>
 
             </div>
 
-            <div class="island-help">
-                Select a Gubby from your inventory, then choose a slot.
+            <div id="islandMessage" class="island-message">
+                Open your inventory and select a Gubby.
             </div>
 
         </section>
 
 
-        <!-- BOTTOM CONTROLS -->
+        <!-- BUTTONS -->
 
-        <div class="controls">
+        <div class="bottom-buttons">
 
             <button id="shopButton">
                 🛒 SHOP
@@ -75,7 +95,7 @@
     </main>
 
 
-    <!-- SHOP PANEL -->
+    <!-- SHOP -->
 
     <div id="shopPanel" class="panel">
 
@@ -83,48 +103,52 @@
 
             <span>GUBBY SHOP</span>
 
-            <button class="close-panel" data-close="shopPanel">
+            <button class="close-button" data-panel="shopPanel">
                 ✕
             </button>
 
         </div>
 
-        <div class="shop-list">
 
-            <div class="shop-card">
+        <div class="shop-item">
 
-                <img src="gubby.png">
+            <img src="gubby.png">
 
-                <div class="shop-info">
+            <div class="item-info">
 
-                    <strong>Normal Gubby</strong>
+                <strong>Normal Gubby</strong>
 
-                    <span>🪙 5</span>
+                <small>🎵 Makes a silly sound</small>
 
-                    <button onclick="buyGubby('normal')">
-                        BUY
-                    </button>
+                <span>🪙 5</span>
 
-                </div>
+                <button onclick="buyGubby('normal')">
+                    BUY
+                </button>
 
             </div>
 
+        </div>
 
-            <div class="shop-card">
 
-                <img src="gubby.png" class="gold">
+        <div class="shop-item">
 
-                <div class="shop-info">
+            <img
+                src="gubby.png"
+                class="golden"
+            >
 
-                    <strong>Golden Gubby</strong>
+            <div class="item-info">
 
-                    <span>🪙 15</span>
+                <strong>Golden Gubby</strong>
 
-                    <button onclick="buyGubby('golden')">
-                        BUY
-                    </button>
+                <small>✨ A shiny singer</small>
 
-                </div>
+                <span>🪙 15</span>
+
+                <button onclick="buyGubby('golden')">
+                    BUY
+                </button>
 
             </div>
 
@@ -133,7 +157,7 @@
     </div>
 
 
-    <!-- INVENTORY PANEL -->
+    <!-- INVENTORY -->
 
     <div id="inventoryPanel" class="panel">
 
@@ -141,16 +165,20 @@
 
             <span>GUBBY INVENTORY</span>
 
-            <button class="close-panel" data-close="inventoryPanel">
+            <button class="close-button" data-panel="inventoryPanel">
                 ✕
             </button>
 
         </div>
 
-        <div id="inventoryList" class="inventory-list"></div>
 
-        <div id="selectedText" class="selected-text">
-            Select a Gubby to place it.
+        <div id="inventory" class="inventory">
+
+        </div>
+
+
+        <div id="inventoryMessage" class="inventory-message">
+            Choose a Gubby.
         </div>
 
     </div>
@@ -159,10 +187,12 @@
     <!-- SOUNDS -->
 
     <audio id="normalSound" src="gubby-sing.mp3"></audio>
+
     <audio id="goldenSound" src="golden-gubby-sing.mp3"></audio>
 
 
     <script src="my-singing-gubby.js"></script>
 
 </body>
+
 </html>
