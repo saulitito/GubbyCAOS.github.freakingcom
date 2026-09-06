@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>GUBBY FULL CAOS</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =========================
+    <!-- =====================================
          NAVBAR
-    ========================== -->
+         ===================================== -->
 
     <nav class="navbar">
 
@@ -21,37 +29,29 @@
             GUBBY
         </div>
 
-        <div class="nav-links">
 
-            <button id="gubbyButton">
-                RELEASE GUBBYS
-            </button>
+        <div class="nav-links">
 
             <button id="settingsButton">
                 ⚙ SETTINGS
             </button>
 
+
             <button id="clearButton">
                 🧹 CLEAR
             </button>
 
+
             <a href="still-life.html">
                 <button>
-                    ..?
+                    STILL LIFE
                 </button>
             </a>
 
-            <a href="my-singing-gubby.html">
-                <button>🎵 MY SINGING GUBBY</button>
-            </a>
 
-            <a
-                href="https://isthatagubby.neocities.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <a href="my-singing-gubby.html">
                 <button>
-                    Go to Gubhub🤑
+                    🎵 MY SINGING GUBBY
                 </button>
             </a>
 
@@ -60,20 +60,30 @@
     </nav>
 
 
-    <!-- =========================
+    <!-- =====================================
          TITLE
-    ========================== -->
+         ===================================== -->
 
     <div class="title">
         GUBBY FULL CAOS
     </div>
 
 
-    <!-- =========================
-         SETTINGS
-    ========================== -->
+    <!-- =====================================
+         GUBBY CONTAINER
+         ===================================== -->
 
-    <div id="settingsMenu" class="settings-menu">
+    <div id="gubbyContainer"></div>
+
+
+    <!-- =====================================
+         SETTINGS MENU
+         ===================================== -->
+
+    <div
+        id="settingsMenu"
+        class="settings-menu"
+    >
 
         <div class="settings-header">
 
@@ -91,63 +101,15 @@
         <div class="setting">
 
             <span>
-                🔊 SOUNDS
-            </span>
-
-            <button
-                class="toggle active"
-                id="soundToggle"
-            >
-                ON
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <span>
-                🌎 GRAVITY
-            </span>
-
-            <button
-                class="toggle active"
-                id="gravityToggle"
-            >
-                ON
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <span>
-                💥 WALL BOUNCE
-            </span>
-
-            <button
-                class="toggle active"
-                id="bounceToggle"
-            >
-                ON
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <span>
-                👥 GUBBYS PER CLICK
+                Gubby Amount
             </span>
 
             <input
                 id="gubbyAmount"
                 type="number"
                 min="1"
-                max="100"
-                value="15"
+                max="200"
+                value="30"
             >
 
         </div>
@@ -156,12 +118,28 @@
         <div class="setting">
 
             <span>
-                ⚡ CHAOS MODE
+                Golden Gubbys
             </span>
 
             <button
+                id="goldenToggle"
                 class="toggle"
-                id="chaosToggle"
+            >
+                OFF
+            </button>
+
+        </div>
+
+
+        <div class="setting">
+
+            <span>
+                Rainbow Gubbys
+            </span>
+
+            <button
+                id="rainbowToggle"
+                class="toggle"
             >
                 OFF
             </button>
@@ -171,21 +149,435 @@
     </div>
 
 
-    <!-- =========================
-         GUBBY CONTAINER
-    ========================== -->
+    <!-- =====================================
+         COMMENTS
+         ===================================== -->
 
-    <main id="gubbyContainer"></main>
+    <section
+        id="commentsSection"
+        class="comments-section"
+    >
+
+        <div class="comments-title">
+            💬 GUBBY COMMENTS
+        </div>
 
 
-    <!-- =========================
-         AUDIO
-    ========================== -->
+        <!-- Comment form -->
 
-    <audio id="gubbySound" src="gubby.mp3"></audio>
+        <div class="comment-form">
 
+            <input
+                id="commentName"
+                type="text"
+                maxlength="30"
+                placeholder="Your name..."
+            >
+
+
+            <textarea
+                id="commentText"
+                maxlength="300"
+                placeholder="Say something about the Gubbys..."
+            ></textarea>
+
+
+            <button id="postComment">
+                POST COMMENT
+            </button>
+
+        </div>
+
+
+        <!-- Messages -->
+
+        <div
+            id="commentMessage"
+            class="comment-message"
+        ></div>
+
+
+        <!-- Comments appear here -->
+
+        <div
+            id="commentsList"
+            class="comments-list"
+        >
+
+            <div class="loading-comments">
+                Loading Gubby comments...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FIREBASE
+         ===================================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            query,
+            orderBy,
+            onSnapshot,
+            serverTimestamp
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+        // =====================================
+        // PUT YOUR FIREBASE CONFIG HERE
+        // =====================================
+
+        const firebaseConfig = {
+
+            apiKey: "YOUR_API_KEY",
+
+            authDomain:
+                "YOUR_PROJECT.firebaseapp.com",
+
+            projectId:
+                "YOUR_PROJECT_ID",
+
+            storageBucket:
+                "YOUR_PROJECT.firebasestorage.app",
+
+            messagingSenderId:
+                "YOUR_MESSAGING_SENDER_ID",
+
+            appId:
+                "YOUR_APP_ID"
+
+        };
+
+
+        // =====================================
+        // FIREBASE START
+        // =====================================
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getFirestore(app);
+
+
+        // =====================================
+        // HTML
+        // =====================================
+
+        const commentName =
+            document.getElementById(
+                "commentName"
+            );
+
+
+        const commentText =
+            document.getElementById(
+                "commentText"
+            );
+
+
+        const postComment =
+            document.getElementById(
+                "postComment"
+            );
+
+
+        const commentsList =
+            document.getElementById(
+                "commentsList"
+            );
+
+
+        const commentMessage =
+            document.getElementById(
+                "commentMessage"
+            );
+
+
+        // =====================================
+        // POST COMMENT
+        // =====================================
+
+        postComment.onclick =
+            async () => {
+
+                const name =
+                    commentName.value.trim();
+
+
+                const text =
+                    commentText.value.trim();
+
+
+                // Check name
+                if (!name) {
+
+                    commentMessage.textContent =
+                        "Please enter your name 😭";
+
+                    return;
+                }
+
+
+                // Check comment
+                if (!text) {
+
+                    commentMessage.textContent =
+                        "Write something first 😭";
+
+                    return;
+                }
+
+
+                // Prevent huge names
+                if (
+                    name.length > 30
+                ) {
+
+                    commentMessage.textContent =
+                        "Name is too long!";
+
+                    return;
+                }
+
+
+                postComment.disabled =
+                    true;
+
+
+                commentMessage.textContent =
+                    "Posting...";
+
+
+                try {
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "comments"
+                        ),
+                        {
+
+                            name: name,
+
+                            text: text,
+
+                            createdAt:
+                                serverTimestamp()
+
+                        }
+                    );
+
+
+                    commentName.value =
+                        "";
+
+                    commentText.value =
+                        "";
+
+
+                    commentMessage.textContent =
+                        "Comment posted! 🎉";
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    commentMessage.textContent =
+                        "Couldn't post comment 😭";
+                }
+
+
+                postComment.disabled =
+                    false;
+            };
+
+
+        // =====================================
+        // LOAD COMMENTS
+        // =====================================
+
+        const commentsQuery =
+            query(
+                collection(
+                    db,
+                    "comments"
+                ),
+                orderBy(
+                    "createdAt",
+                    "desc"
+                )
+            );
+
+
+        onSnapshot(
+            commentsQuery,
+            snapshot => {
+
+                commentsList.innerHTML =
+                    "";
+
+
+                if (
+                    snapshot.empty
+                ) {
+
+                    commentsList.innerHTML = `
+                        <div class="loading-comments">
+                            No comments yet...
+                            Be the first Gubby! 🗿
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                snapshot.forEach(
+                    doc => {
+
+                        const data =
+                            doc.data();
+
+
+                        const comment =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        comment.className =
+                            "comment";
+
+
+                        const header =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        header.className =
+                            "comment-header";
+
+
+                        const name =
+                            document.createElement(
+                                "strong"
+                            );
+
+
+                        name.textContent =
+                            data.name ||
+                            "Anonymous";
+
+
+                        const date =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        if (
+                            data.createdAt
+                        ) {
+
+                            date.textContent =
+                                data.createdAt
+                                    .toDate()
+                                    .toLocaleString();
+                        }
+
+
+                        const text =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        text.className =
+                            "comment-text";
+
+
+                        text.textContent =
+                            data.text ||
+                            "";
+
+
+                        header.appendChild(
+                            name
+                        );
+
+
+                        header.appendChild(
+                            date
+                        );
+
+
+                        comment.appendChild(
+                            header
+                        );
+
+
+                        comment.appendChild(
+                            text
+                        );
+
+
+                        commentsList.appendChild(
+                            comment
+                        );
+
+                    }
+                );
+
+            },
+
+            error => {
+
+                console.error(
+                    "Comment loading error:",
+                    error
+                );
+
+
+                commentsList.innerHTML = `
+                    <div class="loading-comments">
+                        Couldn't load comments 😭
+                    </div>
+                `;
+            }
+        );
+
+    </script>
+
+
+    <!-- =====================================
+         MAIN GAME SCRIPT
+         ===================================== -->
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
