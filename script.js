@@ -171,7 +171,20 @@ const MENU_BUTTONS = [
                 "still-life.html";
 
         }
+    },
+    {
+    id: "paperFire",
+
+    icon: "🔥",
+
+    text: "PAPER FIRE",
+
+    action: () => {
+
+        window.location.href = "Paper%20Fire.html";
+
     }
+}
 
 ];
 
